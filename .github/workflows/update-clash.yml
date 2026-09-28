@@ -1,0 +1,48 @@
+name: update clash.yaml
+
+on:
+  schedule:
+    # 每 3 小时重新抓取一次（与 FlClash 订阅自动更新间隔对齐）
+    - cron: "0 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-clash
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate clash.yaml
+        # --max-http-delay: 额外校验代理能否走 HTTPS(CONNECT)，免费 HTTP 代理里大部分不支持，
+        # 加上后节点更少但更"能用"；想保留更多节点就去掉这个参数。
+        run: python gen_clash.py --output clash.yaml --max-http-delay 8000
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+users.noreply.github.com"
+          if git diff --quiet -- clash.yaml; then
+            echo "clash.yaml 无变化，跳过提交"
+            exit 0
+          fi
+          git add clash.yaml
+          git commit -m "chore: update clash subscription $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

@@ -1,0 +1,5 @@
+# 免费代理抓取 + Clash 订阅生成依赖
+pyfreeproxy>=0.5.2
+PyYAML>=6.0
+# 校验 socks5 节点时需要（requests 通过 socks5 代理发请求）
+PySocks>=1.7.1
