@@ -1,188 +1,140 @@
 # Clash(Meta) 订阅 - 由 gen_clash.py 自动生成，请勿手工修改
-# 生成时间(UTC): 2026-09-28 06:49:43
+# 生成时间(UTC): 2026-09-28 07:15:02
 # 节点数: 50  延迟上限: 3000ms  策略: TCP 延迟排序取 TOP 50
 mixed-port: 7890
 allow-lan: false
 mode: rule
 log-level: warning
 proxies:
-- name: http-107.150.41.226:18080
-  type: http
-  server: 107.150.41.226
-  port: 18080
-- name: http-131.153.163.86:36685
-  type: http
-  server: 131.153.163.86
-  port: 36685
-- name: http-159.203.61.169:3128
-  type: http
-  server: 159.203.61.169
-  port: 3128
-- name: http-131.153.163.84:9918
-  type: http
-  server: 131.153.163.84
-  port: 9918
-- name: http-131.153.163.86:9114
-  type: http
-  server: 131.153.163.86
-  port: 9114
-- name: http-131.153.163.86:8254
-  type: http
-  server: 131.153.163.86
-  port: 8254
-- name: http-172.210.12.8:3128
-  type: http
-  server: 172.210.12.8
-  port: 3128
-- name: http-131.153.163.84:9402
-  type: http
-  server: 131.153.163.84
-  port: 9402
+- name: socks5-172.171.169.205:3000
+  type: socks5
+  server: 172.171.169.205
+  port: 3000
+  udp: true
 - name: socks5-13.90.182.199:3001
   type: socks5
   server: 13.90.182.199
   port: 3001
   udp: true
+- name: http-131.153.163.86:8727
+  type: http
+  server: 131.153.163.86
+  port: 8727
+- name: http-172.210.12.8:3128
+  type: http
+  server: 172.210.12.8
+  port: 3128
+- name: http-34.238.148.125:3128
+  type: http
+  server: 34.238.148.125
+  port: 3128
+- name: http-131.153.163.84:32669
+  type: http
+  server: 131.153.163.84
+  port: 32669
+- name: http-209.97.150.167:3128
+  type: http
+  server: 209.97.150.167
+  port: 3128
+- name: http-198.199.86.11:3128
+  type: http
+  server: 198.199.86.11
+  port: 3128
 - name: socks5-83.147.217.103:1080
   type: socks5
   server: 83.147.217.103
   port: 1080
   udp: true
-- name: http-108.181.246.55:9898
-  type: http
-  server: 108.181.246.55
-  port: 9898
-- name: http-209.97.150.167:80
-  type: http
-  server: 209.97.150.167
-  port: 80
-- name: http-198.199.86.11:3128
-  type: http
-  server: 198.199.86.11
-  port: 3128
+- name: socks5-209.50.255.91:1080
+  type: socks5
+  server: 209.50.255.91
+  port: 1080
+  udp: true
 - name: socks5-159.223.167.188:10000
   type: socks5
   server: 159.223.167.188
   port: 10000
   udp: true
-- name: socks5-67.207.92.87:1088
+- name: socks5-38.49.210.79:40000
   type: socks5
-  server: 67.207.92.87
-  port: 1088
+  server: 38.49.210.79
+  port: 40000
   udp: true
-- name: http-45.174.253.3:999
+- name: http-159.203.61.169:8080
   type: http
-  server: 45.174.253.3
-  port: 999
-- name: http-138.68.60.8:80
-  type: http
-  server: 138.68.60.8
-  port: 80
-- name: socks5-49.51.233.28:1080
-  type: socks5
-  server: 49.51.233.28
-  port: 1080
-  udp: true
-- name: http-174.138.162.37:56333
-  type: http
-  server: 174.138.162.37
-  port: 56333
-- name: socks5-43.135.176.121:1080
-  type: socks5
-  server: 43.135.176.121
-  port: 1080
-  udp: true
-- name: http-206.135.56.50:8080
-  type: http
-  server: 206.135.56.50
+  server: 159.203.61.169
   port: 8080
 - name: http-107.167.18.122:443
   type: http
   server: 107.167.18.122
   port: 443
-- name: socks5-45.61.129.165:9050
+- name: socks5-193.25.215.182:22222
   type: socks5
-  server: 45.61.129.165
-  port: 9050
+  server: 193.25.215.182
+  port: 22222
   udp: true
-- name: http-103.88.234.239:40002
+- name: http-107.150.41.226:18080
   type: http
-  server: 103.88.234.239
-  port: 40002
-- name: socks5-107.175.194.203:40001
+  server: 107.150.41.226
+  port: 18080
+- name: http-138.68.60.8:3128
+  type: http
+  server: 138.68.60.8
+  port: 3128
+- name: http-165.154.162.73:8888
+  type: http
+  server: 165.154.162.73
+  port: 8888
+- name: socks5-49.51.233.28:1080
   type: socks5
-  server: 107.175.194.203
-  port: 40001
+  server: 49.51.233.28
+  port: 1080
   udp: true
-- name: http-146.190.60.147:8001
-  type: http
-  server: 146.190.60.147
-  port: 8001
 - name: http-190.0.246.213:4040
   type: http
   server: 190.0.246.213
   port: 4040
-- name: http-174.138.162.238:8001
+- name: http-190.0.246.210:4040
   type: http
-  server: 174.138.162.238
-  port: 8001
-- name: http-190.97.241.106:999
-  type: http
-  server: 190.97.241.106
-  port: 999
-- name: http-134.209.29.120:8080
+  server: 190.0.246.210
+  port: 4040
+- name: http-134.209.29.120:3128
   type: http
   server: 134.209.29.120
-  port: 8080
-- name: http-144.124.251.24:10187
+  port: 3128
+- name: http-62.141.38.35:3128
   type: http
-  server: 144.124.251.24
-  port: 10187
+  server: 62.141.38.35
+  port: 3128
 - name: http-95.211.174.135:3128
   type: http
   server: 95.211.174.135
   port: 3128
-- name: http-144.124.251.24:10800
-  type: http
-  server: 144.124.251.24
-  port: 10800
-- name: http-144.124.251.24:10566
-  type: http
-  server: 144.124.251.24
-  port: 10566
-- name: http-144.124.251.24:10605
-  type: http
-  server: 144.124.251.24
-  port: 10605
-- name: socks5-45.74.31.22:4114
-  type: socks5
-  server: 45.74.31.22
-  port: 4114
-  udp: true
 - name: http-213.111.146.36:18080
   type: http
   server: 213.111.146.36
   port: 18080
-- name: http-144.124.251.24:10007
+- name: http-167.86.104.220:80
   type: http
-  server: 144.124.251.24
-  port: 10007
-- name: http-186.5.94.206:999
+  server: 167.86.104.220
+  port: 80
+- name: socks5-150.241.70.126:1080
+  type: socks5
+  server: 150.241.70.126
+  port: 1080
+  udp: true
+- name: http-161.35.70.249:3128
   type: http
-  server: 186.5.94.206
-  port: 999
+  server: 161.35.70.249
+  port: 3128
 - name: http-144.124.251.24:10484
   type: http
   server: 144.124.251.24
   port: 10484
-- name: http-144.124.251.24:10878
+- name: http-144.124.251.24:10187
   type: http
   server: 144.124.251.24
-  port: 10878
-- name: http-144.124.251.24:11351
-  type: http
-  server: 144.124.251.24
-  port: 11351
+  port: 10187
 - name: http-144.124.251.24:11198
   type: http
   server: 144.124.251.24
@@ -192,88 +144,137 @@ proxies:
   server: 45.74.31.25
   port: 8682
   udp: true
-- name: http-144.124.251.24:10338
+- name: http-45.86.245.81:8080
+  type: http
+  server: 45.86.245.81
+  port: 8080
+- name: http-144.124.251.24:10346
   type: http
   server: 144.124.251.24
-  port: 10338
-- name: socks5-77.239.96.194:1081
+  port: 10346
+- name: socks5-5.75.133.113:10808
   type: socks5
-  server: 77.239.96.194
-  port: 1081
+  server: 5.75.133.113
+  port: 10808
   udp: true
-- name: http-144.124.251.24:10058
+- name: http-176.111.37.216:39811
+  type: http
+  server: 176.111.37.216
+  port: 39811
+- name: socks5-147.45.77.182:1080
+  type: socks5
+  server: 147.45.77.182
+  port: 1080
+  udp: true
+- name: http-144.124.251.24:11011
   type: http
   server: 144.124.251.24
-  port: 10058
-- name: http-89.117.63.120:8888
+  port: 11011
+- name: http-144.124.251.24:10566
   type: http
-  server: 89.117.63.120
-  port: 8888
-- name: socks5-174.138.189.26:2001
+  server: 144.124.251.24
+  port: 10566
+- name: http-144.124.251.24:10878
+  type: http
+  server: 144.124.251.24
+  port: 10878
+- name: http-144.124.251.24:10605
+  type: http
+  server: 144.124.251.24
+  port: 10605
+- name: socks5-109.205.182.143:1088
   type: socks5
-  server: 174.138.189.26
-  port: 2001
+  server: 109.205.182.143
+  port: 1088
   udp: true
-- name: http-161.35.70.249:3128
+- name: http-45.147.179.118:3129
   type: http
-  server: 161.35.70.249
+  server: 45.147.179.118
+  port: 3129
+- name: http-38.191.37.130:8080
+  type: http
+  server: 38.191.37.130
+  port: 8080
+- name: http-196.204.3.20:1976
+  type: http
+  server: 196.204.3.20
+  port: 1976
+- name: http-41.128.90.52:1976
+  type: http
+  server: 41.128.90.52
+  port: 1976
+- name: http-144.124.251.24:10366
+  type: http
+  server: 144.124.251.24
+  port: 10366
+- name: http-196.204.3.20:1981
+  type: http
+  server: 196.204.3.20
+  port: 1981
+- name: http-41.128.90.52:1981
+  type: http
+  server: 41.128.90.52
+  port: 1981
+- name: http-130.110.103.245:3128
+  type: http
+  server: 130.110.103.245
   port: 3128
 proxy-groups:
 - name: PROXY
   type: url-test
   proxies:
-  - http-107.150.41.226:18080
-  - http-131.153.163.86:36685
-  - http-159.203.61.169:3128
-  - http-131.153.163.84:9918
-  - http-131.153.163.86:9114
-  - http-131.153.163.86:8254
-  - http-172.210.12.8:3128
-  - http-131.153.163.84:9402
+  - socks5-172.171.169.205:3000
   - socks5-13.90.182.199:3001
-  - socks5-83.147.217.103:1080
-  - http-108.181.246.55:9898
-  - http-209.97.150.167:80
+  - http-131.153.163.86:8727
+  - http-172.210.12.8:3128
+  - http-34.238.148.125:3128
+  - http-131.153.163.84:32669
+  - http-209.97.150.167:3128
   - http-198.199.86.11:3128
+  - socks5-83.147.217.103:1080
+  - socks5-209.50.255.91:1080
   - socks5-159.223.167.188:10000
-  - socks5-67.207.92.87:1088
-  - http-45.174.253.3:999
-  - http-138.68.60.8:80
-  - socks5-49.51.233.28:1080
-  - http-174.138.162.37:56333
-  - socks5-43.135.176.121:1080
-  - http-206.135.56.50:8080
+  - socks5-38.49.210.79:40000
+  - http-159.203.61.169:8080
   - http-107.167.18.122:443
-  - socks5-45.61.129.165:9050
-  - http-103.88.234.239:40002
-  - socks5-107.175.194.203:40001
-  - http-146.190.60.147:8001
+  - socks5-193.25.215.182:22222
+  - http-107.150.41.226:18080
+  - http-138.68.60.8:3128
+  - http-165.154.162.73:8888
+  - socks5-49.51.233.28:1080
   - http-190.0.246.213:4040
-  - http-174.138.162.238:8001
-  - http-190.97.241.106:999
-  - http-134.209.29.120:8080
-  - http-144.124.251.24:10187
+  - http-190.0.246.210:4040
+  - http-134.209.29.120:3128
+  - http-62.141.38.35:3128
   - http-95.211.174.135:3128
-  - http-144.124.251.24:10800
-  - http-144.124.251.24:10566
-  - http-144.124.251.24:10605
-  - socks5-45.74.31.22:4114
   - http-213.111.146.36:18080
-  - http-144.124.251.24:10007
-  - http-186.5.94.206:999
+  - http-167.86.104.220:80
+  - socks5-150.241.70.126:1080
+  - http-161.35.70.249:3128
   - http-144.124.251.24:10484
-  - http-144.124.251.24:10878
-  - http-144.124.251.24:11351
+  - http-144.124.251.24:10187
   - http-144.124.251.24:11198
   - socks5-45.74.31.25:8682
-  - http-144.124.251.24:10338
-  - socks5-77.239.96.194:1081
-  - http-144.124.251.24:10058
-  - http-89.117.63.120:8888
-  - socks5-174.138.189.26:2001
-  - http-161.35.70.249:3128
+  - http-45.86.245.81:8080
+  - http-144.124.251.24:10346
+  - socks5-5.75.133.113:10808
+  - http-176.111.37.216:39811
+  - socks5-147.45.77.182:1080
+  - http-144.124.251.24:11011
+  - http-144.124.251.24:10566
+  - http-144.124.251.24:10878
+  - http-144.124.251.24:10605
+  - socks5-109.205.182.143:1088
+  - http-45.147.179.118:3129
+  - http-38.191.37.130:8080
+  - http-196.204.3.20:1976
+  - http-41.128.90.52:1976
+  - http-144.124.251.24:10366
+  - http-196.204.3.20:1981
+  - http-41.128.90.52:1981
+  - http-130.110.103.245:3128
   url: http://www.gstatic.com/generate_204
-  interval: 300
+  interval: 180
   tolerance: 50
 rules:
 - GEOIP,CN,DIRECT
