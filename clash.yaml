@@ -1,278 +1,689 @@
 # Clash(Meta) 订阅 - 由 gen_clash.py 自动生成，请勿手工修改
-# 生成时间(UTC): 2026-09-28 07:15:02
-# 节点数: 50  延迟上限: 3000ms  策略: TCP 延迟排序取 TOP 50
+# 生成时间(UTC): 2026-09-28 07:58:52
+# 节点数: 80  地区数: 23  延迟上限: 3000ms  每地区上限: 6  总上限: 80
 mixed-port: 7890
 allow-lan: false
 mode: rule
 log-level: warning
 proxies:
-- name: socks5-172.171.169.205:3000
+- name: 🇭🇰 HK-01
   type: socks5
-  server: 172.171.169.205
-  port: 3000
+  server: 202.181.24.102
+  port: 10832
   udp: true
-- name: socks5-13.90.182.199:3001
+- name: 🇭🇰 HK-02
+  type: http
+  server: 47.243.92.199
+  port: 3128
+- name: 🇭🇰 HK-03
   type: socks5
-  server: 13.90.182.199
-  port: 3001
+  server: 45.194.33.12
+  port: 30001
   udp: true
-- name: http-131.153.163.86:8727
+- name: 🇭🇰 HK-04
+  type: socks5
+  server: 202.181.24.102
+  port: 10836
+  udp: true
+- name: 🇰🇷 KR-01
   type: http
-  server: 131.153.163.86
-  port: 8727
-- name: http-172.210.12.8:3128
+  server: 183.110.216.128
+  port: 8091
+- name: 🇰🇷 KR-02
+  type: socks5
+  server: 43.155.130.224
+  port: 443
+  udp: true
+- name: 🇸🇨 SC-01
   type: http
-  server: 172.210.12.8
+  server: 154.222.29.105
+  port: 8888
+  tls: true
+- name: 🇯🇵 JP-01
+  type: http
+  server: 8.209.255.13
   port: 3128
-- name: http-34.238.148.125:3128
+- name: 🇦🇲 AM-01
   type: http
-  server: 34.238.148.125
+  server: 185.162.229.7
+  port: 80
+- name: 🇦🇲 AM-02
+  type: http
+  server: 185.162.228.138
+  port: 80
+- name: 🇦🇲 AM-03
+  type: http
+  server: 185.162.229.170
+  port: 80
+- name: 🇦🇲 AM-04
+  type: http
+  server: 185.162.228.151
+  port: 80
+- name: 🇦🇲 AM-05
+  type: http
+  server: 185.162.230.25
+  port: 80
+- name: 🇦🇲 AM-06
+  type: http
+  server: 185.162.229.68
+  port: 80
+- name: 🇺🇸 US-01
+  type: http
+  server: 138.68.60.8
+  port: 8080
+- name: 🇺🇸 US-02
+  type: http
+  server: 107.167.18.122
+  port: 443
+- name: 🇺🇸 US-03
+  type: http
+  server: 45.61.133.104
+  port: 7777
+- name: 🇺🇸 US-04
+  type: socks5
+  server: 45.74.31.47
+  port: 15326
+  udp: true
+- name: 🇺🇸 US-05
+  type: http
+  server: 172.236.242.244
   port: 3128
-- name: http-131.153.163.84:32669
+- name: 🇺🇸 US-06
+  type: socks5
+  server: 45.74.31.50
+  port: 14513
+  udp: true
+- name: 🇨🇦 CA-01
   type: http
-  server: 131.153.163.84
-  port: 32669
-- name: http-209.97.150.167:3128
+  server: 23.227.38.158
+  port: 80
+- name: 🇨🇦 CA-02
   type: http
-  server: 209.97.150.167
+  server: 23.227.38.192
+  port: 80
+- name: 🇨🇦 CA-03
+  type: http
+  server: 40.177.65.8
+  port: 80
+- name: 🇨🇦 CA-04
+  type: http
+  server: 208.66.248.70
+  port: 443
+  tls: true
+- name: 🇨🇦 CA-05
+  type: http
+  server: 129.97.50.72
+  port: 443
+  tls: true
+- name: 🇨🇦 CA-06
+  type: http
+  server: 69.161.223.227
+  port: 8443
+  tls: true
+- name: 🇦🇺 AU-01
+  type: http
+  server: 113.20.1.32
+  port: 12345
+  tls: true
+- name: 🇦🇺 AU-02
+  type: http
+  server: 4.195.16.140
+  port: 80
+- name: 🇦🇺 AU-03
+  type: http
+  server: 139.99.238.83
+  port: 8080
+- name: 🇦🇺 AU-04
+  type: socks5
+  server: 82.115.26.238
+  port: 9050
+  udp: true
+- name: 🇫🇷 FR-01
+  type: http
+  server: 37.187.92.9
+  port: 1024
+- name: 🇫🇷 FR-02
+  type: http
+  server: 37.187.74.125
+  port: 80
+- name: 🇫🇷 FR-03
+  type: http
+  server: 79.137.78.133
+  port: 8007
+- name: 🇫🇷 FR-04
+  type: http
+  server: 62.210.215.36
+  port: 80
+- name: 🇫🇷 FR-05
+  type: http
+  server: 195.154.191.26
+  port: 1087
+- name: 🇫🇷 FR-06
+  type: http
+  server: 109.199.119.160
+  port: 80
+- name: 🇩🇪 DE-01
+  type: http
+  server: 195.201.249.114
+  port: 80
+- name: 🇩🇪 DE-02
+  type: http
+  server: 212.227.215.109
+  port: 8128
+- name: 🇩🇪 DE-03
+  type: http
+  server: 195.201.14.69
+  port: 80
+- name: 🇩🇪 DE-04
+  type: http
+  server: 157.90.10.50
+  port: 8080
+- name: 🇩🇪 DE-05
+  type: http
+  server: 157.90.10.50
+  port: 5955
+- name: 🇩🇪 DE-06
+  type: socks5
+  server: 5.75.133.113
+  port: 10807
+  udp: true
+- name: 🇳🇱 NL-01
+  type: socks5
+  server: 45.74.31.40
+  port: 6497
+  udp: true
+- name: 🇳🇱 NL-02
+  type: socks5
+  server: 45.74.31.23
+  port: 7237
+  udp: true
+- name: 🇳🇱 NL-03
+  type: socks5
+  server: 45.74.31.22
+  port: 4204
+  udp: true
+- name: 🇳🇱 NL-04
+  type: socks5
+  server: 45.74.31.50
+  port: 6348
+  udp: true
+- name: 🇳🇱 NL-05
+  type: socks5
+  server: 45.74.31.23
+  port: 7627
+  udp: true
+- name: 🇳🇱 NL-06
+  type: socks5
+  server: 45.74.31.50
+  port: 11368
+  udp: true
+- name: 🇦🇹 AT-01
+  type: socks5
+  server: 83.215.25.66
+  port: 9050
+  udp: true
+- name: 🇦🇹 AT-02
+  type: http
+  server: 152.53.107.196
+  port: 443
+  tls: true
+- name: 🇦🇹 AT-03
+  type: http
+  server: 185.232.70.11
+  port: 443
+  tls: true
+- name: 🇦🇹 AT-04
+  type: http
+  server: 195.192.209.130
+  port: 8443
+  tls: true
+- name: 🇦🇹 AT-05
+  type: http
+  server: 193.233.233.62
+  port: 21840
+- name: 🇨🇭 CH-01
+  type: http
+  server: 45.131.254.246
+  port: 443
+  tls: true
+- name: 🇨🇭 CH-02
+  type: http
+  server: 212.243.240.120
+  port: 443
+  tls: true
+- name: 🇨🇭 CH-03
+  type: http
+  server: 84.72.72.153
+  port: 443
+  tls: true
+- name: 🇨🇭 CH-04
+  type: socks5
+  server: 185.195.71.218
+  port: 18080
+  udp: true
+- name: 🇨🇭 CH-05
+  type: http
+  server: 16.63.207.85
+  port: 80
+- name: 🇨🇭 CH-06
+  type: http
+  server: 74.242.169.16
   port: 3128
-- name: http-198.199.86.11:3128
+- name: 🇷🇺 RU-01
   type: http
-  server: 198.199.86.11
+  server: 95.66.138.21
+  port: 8880
+- name: 🇷🇺 RU-02
+  type: http
+  server: 94.247.241.70
+  port: 53640
+- name: 🇷🇺 RU-03
+  type: http
+  server: 176.106.241.50
+  port: 80
+- name: 🇷🇺 RU-04
+  type: http
+  server: 92.124.154.154
+  port: 8080
+- name: 🇱🇻 LV-01
+  type: http
+  server: 87.226.22.225
+  port: 80
+- name: 🇸🇬 SG-01
+  type: http
+  server: 43.98.172.166
   port: 3128
-- name: socks5-83.147.217.103:1080
+- name: 🇦🇷 AR-01
+  type: http
+  server: 186.33.51.9
+  port: 999
+- name: 🇧🇪 BE-01
+  type: http
+  server: 146.103.56.247
+  port: 5795
+- name: 🇧🇪 BE-02
+  type: http
+  server: 146.103.56.185
+  port: 5733
+- name: 🇧🇪 BE-03
+  type: http
+  server: 146.103.3.128
+  port: 7181
+- name: 🇧🇪 BE-04
+  type: http
+  server: 146.103.56.178
+  port: 5726
+- name: 🇧🇪 BE-05
+  type: http
+  server: 146.103.56.72
+  port: 5620
+- name: 🇲🇽 MX-01
+  type: http
+  server: 103.88.234.239
+  port: 40006
+- name: 🇲🇽 MX-02
+  type: http
+  server: 103.88.234.239
+  port: 40002
+- name: 🇲🇽 MX-03
+  type: http
+  server: 205.164.192.115
+  port: 999
+- name: 🇬🇧 GB-01
+  type: http
+  server: 107.181.155.86
+  port: 80
+- name: 🇬🇧 GB-02
+  type: http
+  server: 134.209.29.120
+  port: 3128
+- name: 🇬🇧 GB-03
+  type: http
+  server: 134.209.29.120
+  port: 80
+- name: 🇬🇷 GR-01
   type: socks5
   server: 83.147.217.103
   port: 1080
   udp: true
-- name: socks5-209.50.255.91:1080
-  type: socks5
-  server: 209.50.255.91
-  port: 1080
-  udp: true
-- name: socks5-159.223.167.188:10000
-  type: socks5
-  server: 159.223.167.188
-  port: 10000
-  udp: true
-- name: socks5-38.49.210.79:40000
-  type: socks5
-  server: 38.49.210.79
-  port: 40000
-  udp: true
-- name: http-159.203.61.169:8080
+- name: 🇷🇸 RS-01
   type: http
-  server: 159.203.61.169
-  port: 8080
-- name: http-107.167.18.122:443
-  type: http
-  server: 107.167.18.122
-  port: 443
-- name: socks5-193.25.215.182:22222
-  type: socks5
-  server: 193.25.215.182
-  port: 22222
-  udp: true
-- name: http-107.150.41.226:18080
-  type: http
-  server: 107.150.41.226
-  port: 18080
-- name: http-138.68.60.8:3128
-  type: http
-  server: 138.68.60.8
-  port: 3128
-- name: http-165.154.162.73:8888
-  type: http
-  server: 165.154.162.73
-  port: 8888
-- name: socks5-49.51.233.28:1080
-  type: socks5
-  server: 49.51.233.28
-  port: 1080
-  udp: true
-- name: http-190.0.246.213:4040
-  type: http
-  server: 190.0.246.213
-  port: 4040
-- name: http-190.0.246.210:4040
-  type: http
-  server: 190.0.246.210
-  port: 4040
-- name: http-134.209.29.120:3128
-  type: http
-  server: 134.209.29.120
-  port: 3128
-- name: http-62.141.38.35:3128
-  type: http
-  server: 62.141.38.35
-  port: 3128
-- name: http-95.211.174.135:3128
-  type: http
-  server: 95.211.174.135
-  port: 3128
-- name: http-213.111.146.36:18080
-  type: http
-  server: 213.111.146.36
-  port: 18080
-- name: http-167.86.104.220:80
-  type: http
-  server: 167.86.104.220
+  server: 147.91.22.150
   port: 80
-- name: socks5-150.241.70.126:1080
-  type: socks5
-  server: 150.241.70.126
-  port: 1080
-  udp: true
-- name: http-161.35.70.249:3128
+- name: 🇵🇱 PL-01
   type: http
-  server: 161.35.70.249
-  port: 3128
-- name: http-144.124.251.24:10484
-  type: http
-  server: 144.124.251.24
-  port: 10484
-- name: http-144.124.251.24:10187
-  type: http
-  server: 144.124.251.24
-  port: 10187
-- name: http-144.124.251.24:11198
-  type: http
-  server: 144.124.251.24
-  port: 11198
-- name: socks5-45.74.31.25:8682
-  type: socks5
-  server: 45.74.31.25
-  port: 8682
-  udp: true
-- name: http-45.86.245.81:8080
-  type: http
-  server: 45.86.245.81
+  server: 185.49.31.205
   port: 8080
-- name: http-144.124.251.24:10346
-  type: http
-  server: 144.124.251.24
-  port: 10346
-- name: socks5-5.75.133.113:10808
-  type: socks5
-  server: 5.75.133.113
-  port: 10808
-  udp: true
-- name: http-176.111.37.216:39811
-  type: http
-  server: 176.111.37.216
-  port: 39811
-- name: socks5-147.45.77.182:1080
-  type: socks5
-  server: 147.45.77.182
-  port: 1080
-  udp: true
-- name: http-144.124.251.24:11011
-  type: http
-  server: 144.124.251.24
-  port: 11011
-- name: http-144.124.251.24:10566
-  type: http
-  server: 144.124.251.24
-  port: 10566
-- name: http-144.124.251.24:10878
-  type: http
-  server: 144.124.251.24
-  port: 10878
-- name: http-144.124.251.24:10605
-  type: http
-  server: 144.124.251.24
-  port: 10605
-- name: socks5-109.205.182.143:1088
-  type: socks5
-  server: 109.205.182.143
-  port: 1088
-  udp: true
-- name: http-45.147.179.118:3129
-  type: http
-  server: 45.147.179.118
-  port: 3129
-- name: http-38.191.37.130:8080
-  type: http
-  server: 38.191.37.130
-  port: 8080
-- name: http-196.204.3.20:1976
-  type: http
-  server: 196.204.3.20
-  port: 1976
-- name: http-41.128.90.52:1976
-  type: http
-  server: 41.128.90.52
-  port: 1976
-- name: http-144.124.251.24:10366
-  type: http
-  server: 144.124.251.24
-  port: 10366
-- name: http-196.204.3.20:1981
-  type: http
-  server: 196.204.3.20
-  port: 1981
-- name: http-41.128.90.52:1981
-  type: http
-  server: 41.128.90.52
-  port: 1981
-- name: http-130.110.103.245:3128
-  type: http
-  server: 130.110.103.245
-  port: 3128
 proxy-groups:
 - name: PROXY
+  type: select
+  proxies:
+  - ♻️ 自动选择
+  - 🇦🇲 亚美尼亚
+  - 🇺🇸 美国
+  - 🇨🇦 加拿大
+  - 🇫🇷 法国
+  - 🇩🇪 德国
+  - 🇳🇱 荷兰
+  - 🇨🇭 瑞士
+  - 🇦🇹 奥地利
+  - 🇧🇪 比利时
+  - 🇭🇰 中国香港
+  - 🇦🇺 澳大利亚
+  - 🇷🇺 俄罗斯
+  - 🇲🇽 墨西哥
+  - 🇬🇧 英国
+  - 🇰🇷 韩国
+  - 🇸🇨 塞舌尔
+  - 🇯🇵 日本
+  - 🇱🇻 拉脱维亚
+  - 🇸🇬 新加坡
+  - 🇦🇷 阿根廷
+  - 🇬🇷 希腊
+  - 🇷🇸 塞尔维亚
+  - 🇵🇱 波兰
+  - DIRECT
+- name: ♻️ 自动选择
   type: url-test
   proxies:
-  - socks5-172.171.169.205:3000
-  - socks5-13.90.182.199:3001
-  - http-131.153.163.86:8727
-  - http-172.210.12.8:3128
-  - http-34.238.148.125:3128
-  - http-131.153.163.84:32669
-  - http-209.97.150.167:3128
-  - http-198.199.86.11:3128
-  - socks5-83.147.217.103:1080
-  - socks5-209.50.255.91:1080
-  - socks5-159.223.167.188:10000
-  - socks5-38.49.210.79:40000
-  - http-159.203.61.169:8080
-  - http-107.167.18.122:443
-  - socks5-193.25.215.182:22222
-  - http-107.150.41.226:18080
-  - http-138.68.60.8:3128
-  - http-165.154.162.73:8888
-  - socks5-49.51.233.28:1080
-  - http-190.0.246.213:4040
-  - http-190.0.246.210:4040
-  - http-134.209.29.120:3128
-  - http-62.141.38.35:3128
-  - http-95.211.174.135:3128
-  - http-213.111.146.36:18080
-  - http-167.86.104.220:80
-  - socks5-150.241.70.126:1080
-  - http-161.35.70.249:3128
-  - http-144.124.251.24:10484
-  - http-144.124.251.24:10187
-  - http-144.124.251.24:11198
-  - socks5-45.74.31.25:8682
-  - http-45.86.245.81:8080
-  - http-144.124.251.24:10346
-  - socks5-5.75.133.113:10808
-  - http-176.111.37.216:39811
-  - socks5-147.45.77.182:1080
-  - http-144.124.251.24:11011
-  - http-144.124.251.24:10566
-  - http-144.124.251.24:10878
-  - http-144.124.251.24:10605
-  - socks5-109.205.182.143:1088
-  - http-45.147.179.118:3129
-  - http-38.191.37.130:8080
-  - http-196.204.3.20:1976
-  - http-41.128.90.52:1976
-  - http-144.124.251.24:10366
-  - http-196.204.3.20:1981
-  - http-41.128.90.52:1981
-  - http-130.110.103.245:3128
+  - 🇭🇰 HK-01
+  - 🇭🇰 HK-02
+  - 🇭🇰 HK-03
+  - 🇭🇰 HK-04
+  - 🇰🇷 KR-01
+  - 🇰🇷 KR-02
+  - 🇸🇨 SC-01
+  - 🇯🇵 JP-01
+  - 🇦🇲 AM-01
+  - 🇦🇲 AM-02
+  - 🇦🇲 AM-03
+  - 🇦🇲 AM-04
+  - 🇦🇲 AM-05
+  - 🇦🇲 AM-06
+  - 🇺🇸 US-01
+  - 🇺🇸 US-02
+  - 🇺🇸 US-03
+  - 🇺🇸 US-04
+  - 🇺🇸 US-05
+  - 🇺🇸 US-06
+  - 🇨🇦 CA-01
+  - 🇨🇦 CA-02
+  - 🇨🇦 CA-03
+  - 🇨🇦 CA-04
+  - 🇨🇦 CA-05
+  - 🇨🇦 CA-06
+  - 🇦🇺 AU-01
+  - 🇦🇺 AU-02
+  - 🇦🇺 AU-03
+  - 🇦🇺 AU-04
+  - 🇫🇷 FR-01
+  - 🇫🇷 FR-02
+  - 🇫🇷 FR-03
+  - 🇫🇷 FR-04
+  - 🇫🇷 FR-05
+  - 🇫🇷 FR-06
+  - 🇩🇪 DE-01
+  - 🇩🇪 DE-02
+  - 🇩🇪 DE-03
+  - 🇩🇪 DE-04
+  - 🇩🇪 DE-05
+  - 🇩🇪 DE-06
+  - 🇳🇱 NL-01
+  - 🇳🇱 NL-02
+  - 🇳🇱 NL-03
+  - 🇳🇱 NL-04
+  - 🇳🇱 NL-05
+  - 🇳🇱 NL-06
+  - 🇦🇹 AT-01
+  - 🇦🇹 AT-02
+  - 🇦🇹 AT-03
+  - 🇦🇹 AT-04
+  - 🇦🇹 AT-05
+  - 🇨🇭 CH-01
+  - 🇨🇭 CH-02
+  - 🇨🇭 CH-03
+  - 🇨🇭 CH-04
+  - 🇨🇭 CH-05
+  - 🇨🇭 CH-06
+  - 🇷🇺 RU-01
+  - 🇷🇺 RU-02
+  - 🇷🇺 RU-03
+  - 🇷🇺 RU-04
+  - 🇱🇻 LV-01
+  - 🇸🇬 SG-01
+  - 🇦🇷 AR-01
+  - 🇧🇪 BE-01
+  - 🇧🇪 BE-02
+  - 🇧🇪 BE-03
+  - 🇧🇪 BE-04
+  - 🇧🇪 BE-05
+  - 🇲🇽 MX-01
+  - 🇲🇽 MX-02
+  - 🇲🇽 MX-03
+  - 🇬🇧 GB-01
+  - 🇬🇧 GB-02
+  - 🇬🇧 GB-03
+  - 🇬🇷 GR-01
+  - 🇷🇸 RS-01
+  - 🇵🇱 PL-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇦🇲 亚美尼亚
+  type: url-test
+  proxies:
+  - 🇦🇲 AM-01
+  - 🇦🇲 AM-02
+  - 🇦🇲 AM-03
+  - 🇦🇲 AM-04
+  - 🇦🇲 AM-05
+  - 🇦🇲 AM-06
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇺🇸 美国
+  type: url-test
+  proxies:
+  - 🇺🇸 US-01
+  - 🇺🇸 US-02
+  - 🇺🇸 US-03
+  - 🇺🇸 US-04
+  - 🇺🇸 US-05
+  - 🇺🇸 US-06
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇨🇦 加拿大
+  type: url-test
+  proxies:
+  - 🇨🇦 CA-01
+  - 🇨🇦 CA-02
+  - 🇨🇦 CA-03
+  - 🇨🇦 CA-04
+  - 🇨🇦 CA-05
+  - 🇨🇦 CA-06
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇫🇷 法国
+  type: url-test
+  proxies:
+  - 🇫🇷 FR-01
+  - 🇫🇷 FR-02
+  - 🇫🇷 FR-03
+  - 🇫🇷 FR-04
+  - 🇫🇷 FR-05
+  - 🇫🇷 FR-06
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇩🇪 德国
+  type: url-test
+  proxies:
+  - 🇩🇪 DE-01
+  - 🇩🇪 DE-02
+  - 🇩🇪 DE-03
+  - 🇩🇪 DE-04
+  - 🇩🇪 DE-05
+  - 🇩🇪 DE-06
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇳🇱 荷兰
+  type: url-test
+  proxies:
+  - 🇳🇱 NL-01
+  - 🇳🇱 NL-02
+  - 🇳🇱 NL-03
+  - 🇳🇱 NL-04
+  - 🇳🇱 NL-05
+  - 🇳🇱 NL-06
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇨🇭 瑞士
+  type: url-test
+  proxies:
+  - 🇨🇭 CH-01
+  - 🇨🇭 CH-02
+  - 🇨🇭 CH-03
+  - 🇨🇭 CH-04
+  - 🇨🇭 CH-05
+  - 🇨🇭 CH-06
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇦🇹 奥地利
+  type: url-test
+  proxies:
+  - 🇦🇹 AT-01
+  - 🇦🇹 AT-02
+  - 🇦🇹 AT-03
+  - 🇦🇹 AT-04
+  - 🇦🇹 AT-05
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇧🇪 比利时
+  type: url-test
+  proxies:
+  - 🇧🇪 BE-01
+  - 🇧🇪 BE-02
+  - 🇧🇪 BE-03
+  - 🇧🇪 BE-04
+  - 🇧🇪 BE-05
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇭🇰 中国香港
+  type: url-test
+  proxies:
+  - 🇭🇰 HK-01
+  - 🇭🇰 HK-02
+  - 🇭🇰 HK-03
+  - 🇭🇰 HK-04
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇦🇺 澳大利亚
+  type: url-test
+  proxies:
+  - 🇦🇺 AU-01
+  - 🇦🇺 AU-02
+  - 🇦🇺 AU-03
+  - 🇦🇺 AU-04
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇷🇺 俄罗斯
+  type: url-test
+  proxies:
+  - 🇷🇺 RU-01
+  - 🇷🇺 RU-02
+  - 🇷🇺 RU-03
+  - 🇷🇺 RU-04
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇲🇽 墨西哥
+  type: url-test
+  proxies:
+  - 🇲🇽 MX-01
+  - 🇲🇽 MX-02
+  - 🇲🇽 MX-03
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇬🇧 英国
+  type: url-test
+  proxies:
+  - 🇬🇧 GB-01
+  - 🇬🇧 GB-02
+  - 🇬🇧 GB-03
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇰🇷 韩国
+  type: url-test
+  proxies:
+  - 🇰🇷 KR-01
+  - 🇰🇷 KR-02
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇸🇨 塞舌尔
+  type: url-test
+  proxies:
+  - 🇸🇨 SC-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇯🇵 日本
+  type: url-test
+  proxies:
+  - 🇯🇵 JP-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇱🇻 拉脱维亚
+  type: url-test
+  proxies:
+  - 🇱🇻 LV-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇸🇬 新加坡
+  type: url-test
+  proxies:
+  - 🇸🇬 SG-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇦🇷 阿根廷
+  type: url-test
+  proxies:
+  - 🇦🇷 AR-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇬🇷 希腊
+  type: url-test
+  proxies:
+  - 🇬🇷 GR-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇷🇸 塞尔维亚
+  type: url-test
+  proxies:
+  - 🇷🇸 RS-01
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇵🇱 波兰
+  type: url-test
+  proxies:
+  - 🇵🇱 PL-01
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50

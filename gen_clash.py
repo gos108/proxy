@@ -13,8 +13,16 @@ gen_clash.py —— 抓取免费代理 → 校验存活 → 生成 Clash(Meta) �
     python gen_clash.py --sources cn                   # 仅国内源（服务器在国内时更稳）
     python gen_clash.py --sources all --jobs 6         # 使用全部内置源
     python gen_clash.py --max-delay 2000 --top-n 80    # 更严格的延迟过滤 / 保留更多节点
-    python gen_clash.py --max-http-delay 5000          # 额外校验 HTTPS(CONNECT) 隧道能力
+    python gen_clash.py --max-http-delay 8000          # 额外校验 HTTPS(CONNECT) 隧道能力
+    python gen_clash.py --no-region-groups             # 退回「单个 PROXY url-test」的老结构
     python gen_clash.py --output /var/www/html/guya/proxy/clash.yaml
+
+生成的分组结构（默认）:
+    PROXY(select) ── 默认选中「♻️ 自动选择」，也可手动锁定某个地区
+      ├─ ♻️ 自动选择(url-test)  = 全部节点自动测速
+      └─ 🇺🇸 美国 / 🇭🇰 中国香港 / 🇯🇵 日本 ...(url-test)  = 各地区节点，按延迟自动选最快
+    节点名形如 "🇺🇸 US-01"，国家码取自各代理源自带字段（缺失的归入 🌐 其他）。
+    默认丢弃 CN 节点（--exclude-regions），因为国内节点延迟最低会被 url-test 长期选中，却没有出境能力。
 
 说明:
     * 每个代理源在独立子进程里抓取并有硬超时（部分源会做大量 IP 归属地查询，很容易挂住），
@@ -76,6 +84,64 @@ HTTPS_TEST_URL = "https://www.baidu.com"
 JSON_MARK_START = "###GEN_CLASH_JSON_START###"
 JSON_MARK_END = "###GEN_CLASH_JSON_END###"
 
+# 分组名（规则里引用 PROXY，PROXY 默认选中自动测速组）
+PROXY_GROUP_NAME = "PROXY"
+AUTO_GROUP_NAME = "♻️ 自动选择"
+UNKNOWN_REGION_LABEL = "🌐 其他"
+
+# 常见国家/地区中文名，未收录的直接显示两位国家码
+COUNTRY_NAMES = {
+    "CN": "中国", "HK": "中国香港", "TW": "中国台湾", "MO": "中国澳门",
+    "US": "美国", "CA": "加拿大", "MX": "墨西哥", "BR": "巴西", "AR": "阿根廷",
+    "CL": "智利", "CO": "哥伦比亚", "PE": "秘鲁", "VE": "委内瑞拉", "EC": "厄瓜多尔",
+    "BO": "玻利维亚", "PY": "巴拉圭", "UY": "乌拉圭", "CR": "哥斯达黎加", "PA": "巴拿马",
+    "GT": "危地马拉", "DO": "多米尼加", "PR": "波多黎各", "JM": "牙买加", "CU": "古巴",
+    "GB": "英国", "IE": "爱尔兰", "FR": "法国", "DE": "德国", "NL": "荷兰",
+    "BE": "比利时", "LU": "卢森堡", "CH": "瑞士", "AT": "奥地利", "IT": "意大利",
+    "ES": "西班牙", "PT": "葡萄牙", "SE": "瑞典", "NO": "挪威", "DK": "丹麦",
+    "FI": "芬兰", "IS": "冰岛", "PL": "波兰", "CZ": "捷克", "SK": "斯洛伐克",
+    "HU": "匈牙利", "RO": "罗马尼亚", "BG": "保加利亚", "GR": "希腊", "HR": "克罗地亚",
+    "SI": "斯洛文尼亚", "RS": "塞尔维亚", "BA": "波黑", "MK": "北马其顿", "AL": "阿尔巴尼亚",
+    "ME": "黑山", "MT": "马耳他", "CY": "塞浦路斯", "LT": "立陶宛", "LV": "拉脱维亚",
+    "EE": "爱沙尼亚", "MD": "摩尔多瓦", "UA": "乌克兰", "BY": "白俄罗斯", "RU": "俄罗斯",
+    "TR": "土耳其", "GE": "格鲁吉亚", "AM": "亚美尼亚", "AZ": "阿塞拜疆", "KZ": "哈萨克斯坦",
+    "UZ": "乌兹别克斯坦", "KG": "吉尔吉斯斯坦", "TJ": "塔吉克斯坦", "TM": "土库曼斯坦", "MN": "蒙古",
+    "JP": "日本", "KR": "韩国", "SG": "新加坡", "MY": "马来西亚", "TH": "泰国",
+    "VN": "越南", "PH": "菲律宾", "ID": "印度尼西亚", "IN": "印度", "PK": "巴基斯坦",
+    "BD": "孟加拉国", "LK": "斯里兰卡", "NP": "尼泊尔", "MM": "缅甸", "KH": "柬埔寨",
+    "LA": "老挝", "BN": "文莱", "MV": "马尔代夫", "BT": "不丹", "TL": "东帝汶",
+    "IL": "以色列", "SA": "沙特阿拉伯", "AE": "阿联酋", "QA": "卡塔尔", "KW": "科威特",
+    "BH": "巴林", "OM": "阿曼", "JO": "约旦", "LB": "黎巴嫩", "SY": "叙利亚",
+    "IQ": "伊拉克", "IR": "伊朗", "AF": "阿富汗", "YE": "也门", "PS": "巴勒斯坦",
+    "AU": "澳大利亚", "NZ": "新西兰", "FJ": "斐济", "PG": "巴布亚新几内亚", "GU": "关岛",
+    "ZA": "南非", "EG": "埃及", "NG": "尼日利亚", "KE": "肯尼亚", "MA": "摩洛哥",
+    "TN": "突尼斯", "DZ": "阿尔及利亚", "GH": "加纳", "ET": "埃塞俄比亚", "TZ": "坦桑尼亚",
+    "UG": "乌干达", "ZW": "津巴布韦", "ZM": "赞比亚", "MZ": "莫桑比克", "AO": "安哥拉",
+    "CM": "喀麦隆", "CI": "科特迪瓦", "SN": "塞内加尔", "SC": "塞舌尔", "MU": "毛里求斯",
+    "BW": "博茨瓦纳", "NA": "纳米比亚", "MW": "马拉维", "RW": "卢旺达", "SO": "索马里",
+    "LY": "利比亚", "SD": "苏丹",
+}
+
+
+def flag_of(code: str) -> str:
+    """两位国家码 -> 国旗 emoji（非法码回退到地球）"""
+    code = (code or "").strip().upper()
+    if len(code) != 2 or not code.isalpha():
+        return "🌐"
+    return "".join(chr(0x1F1E6 + ord(char) - ord("A")) for char in code)
+
+
+def region_code(proxy) -> str:
+    """取节点的两位国家码，缺失/非法一律归入 ZZ"""
+    code = (getattr(proxy, "country_code", "") or "").strip().upper()
+    return code if len(code) == 2 and code.isalpha() else "ZZ"
+
+
+def region_label(code: str) -> str:
+    if code == "ZZ":
+        return UNKNOWN_REGION_LABEL
+    return f"{flag_of(code)} {COUNTRY_NAMES.get(code, code)}"
+
 
 # ---------------------------------------------------------------- 工具函数
 
@@ -94,7 +160,17 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--max-delay", type=int, default=3000, help="TCP 连接延迟上限(毫秒)")
     parser.add_argument("--max-http-delay", type=int, default=0,
                         help="HTTP/HTTPS 请求延迟上限(毫秒)，0 表示不做该项校验")
-    parser.add_argument("--top-n", type=int, default=50, help="最终保留的节点数")
+    parser.add_argument("--top-n", type=int, default=80,
+                        help="最终保留的节点总数（先按地区均衡、再按延迟排序截断）")
+    parser.add_argument("--per-region-top", type=int, default=6,
+                        help="每个国家/地区最多保留的节点数，0 表示不限制")
+    parser.add_argument("--no-region-groups", action="store_true",
+                        help="不按国家/地区分组，退回单个 PROXY url-test 分组")
+    parser.add_argument("--exclude-regions", default="CN",
+                        help="直接丢弃的国家/地区码（逗号分隔）。默认丢弃 CN："
+                             "国内节点延迟最低，url-test 会一直选中它们，但这类节点没有出境能力")
+    parser.add_argument("--name-with-ip", action="store_true",
+                        help="节点名后缀带上 ip:port（默认只显示地区+序号，界面更清爽）")
     parser.add_argument("--max-pages", type=int, default=1, help="每个源的翻页数")
     parser.add_argument("--per-source-limit", type=int, default=300,
                         help="单个源最多保留的候选数，0 表示不限制")
@@ -105,7 +181,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--output", default="clash.yaml", help="输出的 Clash 配置文件路径")
     parser.add_argument("--port", type=int, default=7890, help="Clash 的 mixed-port")
     parser.add_argument("--test-url", default=HEALTH_CHECK_URL, help="PROXY 分组测速地址")
-    parser.add_argument("--interval", type=int, default=180, help="PROXY 分组测速间隔(秒)")
+    parser.add_argument("--interval", type=int, default=180, help="url-test 分组测速间隔(秒)")
     parser.add_argument("--tolerance", type=int, default=50, help="PROXY 分组切换容差(毫秒)")
     parser.add_argument("--keep-empty", action="store_true",
                         help="即使一个节点都没抓到也写出文件（默认不覆盖旧文件并退出码 1）")
@@ -215,8 +291,9 @@ def fetch_all(args: argparse.Namespace) -> list:
 # ---------------------------------------------------------------- 校验
 
 def dedupe_and_normalize(proxies: list, args: argparse.Namespace) -> list:
-    """协议校验 + 去重 + 剔除内网/非法地址，并统一设置短超时"""
-    seen, result, dropped = set(), [], 0
+    """协议校验 + 去重 + 剔除内网/非法地址 + 排除指定地区，并统一设置短超时"""
+    excluded = {item.strip().upper() for item in (args.exclude_regions or "").split(",") if item.strip()}
+    seen, result, dropped, excluded_hits = set(), [], 0, 0
     for proxy in proxies:
         protocol = (getattr(proxy, "protocol", "") or "").lower()
         if protocol not in ALLOWED_PROTOCOLS:
@@ -231,6 +308,9 @@ def dedupe_and_normalize(proxies: list, args: argparse.Namespace) -> list:
         if not ip_obj.is_global or not 1 <= port <= 65535:
             dropped += 1
             continue
+        if region_code(proxy) in excluded:
+            excluded_hits += 1
+            continue
         key = (proxy.ip, port)
         if key in seen:
             dropped += 1
@@ -239,7 +319,8 @@ def dedupe_and_normalize(proxies: list, args: argparse.Namespace) -> list:
         proxy.protocol, proxy.port = protocol, str(port)
         proxy.test_timeout = args.timeout  # 关键：默认 60s 太慢
         result.append(proxy)
-    log(f"去重/清洗后剩余 {len(result)} 个候选（丢弃 {dropped} 个）")
+    extra = f"，另按 --exclude-regions {sorted(excluded)} 丢弃 {excluded_hits} 个" if excluded else ""
+    log(f"去重/清洗后剩余 {len(result)} 个候选（丢弃 {dropped} 个{extra}）")
     return result
 
 
@@ -307,23 +388,84 @@ def strict_http_filter(pairs: list, args: argparse.Namespace) -> list:
 
 # ---------------------------------------------------------------- 生成
 
+def select_nodes(pairs: list, args: argparse.Namespace) -> list:
+    """先按地区均衡（每个地区最多 per-region-top 个），再按延迟排序截断到 top-n"""
+    pairs = sorted(pairs, key=lambda item: item[1])
+    if args.no_region_groups or args.per_region_top <= 0:
+        return pairs[:max(0, args.top_n)]
+
+    per_region, order = {}, []
+    for proxy, delay in pairs:
+        code = region_code(proxy)
+        if code not in per_region:
+            per_region[code] = []
+            order.append(code)
+        if len(per_region[code]) < args.per_region_top:
+            per_region[code].append((proxy, delay))
+    kept = [item for code in order for item in per_region[code]]
+    kept.sort(key=lambda item: item[1])
+    return kept[:max(0, args.top_n)]
+
+
 def to_clash(pairs: list, args: argparse.Namespace) -> dict:
-    proxies, names = [], []
-    for proxy, _ in pairs:
-        protocol = proxy.protocol.lower()
-        name = f"{protocol}-{proxy.ip}:{proxy.port}"
-        node = {
-            "name": name,
-            "type": "socks5" if protocol == "socks5" else "http",
-            "server": proxy.ip,
-            "port": int(proxy.port),
-        }
-        if protocol == "socks5":
-            node["udp"] = True
-        if protocol == "https":
-            node["tls"] = True
-        proxies.append(node)
-        names.append(name)
+    # 按国家/地区归组，节点名形如 "🇺🇸 US-01"（FlClash 卡片里已单独显示类型与延迟，名字越短越清爽）
+    regions: dict[str, list] = {}
+    for proxy, delay in pairs:
+        regions.setdefault(region_code(proxy), []).append((proxy, delay))
+
+    proxies, region_groups = [], []
+    for code, items in regions.items():
+        items.sort(key=lambda item: item[1])
+        names = []
+        for index, (proxy, _) in enumerate(items, 1):
+            protocol = proxy.protocol.lower()
+            name = f"{flag_of(code)} {code}-{index:02d}"
+            if args.name_with_ip:
+                name += f" · {proxy.ip}:{proxy.port}"
+            node = {
+                "name": name,
+                "type": "socks5" if protocol == "socks5" else "http",
+                "server": proxy.ip,
+                "port": int(proxy.port),
+            }
+            if protocol == "socks5":
+                node["udp"] = True
+            if protocol == "https":
+                node["tls"] = True
+            proxies.append(node)
+            names.append(name)
+        region_groups.append({"code": code, "label": region_label(code),
+                              "names": names, "best": items[0][1]})
+
+    # 地区分组：节点多的排前面，同数量时最优延迟小的在前
+    region_groups.sort(key=lambda group: (-len(group["names"]), group["best"]))
+
+    all_names = [node["name"] for node in proxies]
+    auto_group = {
+        "name": AUTO_GROUP_NAME,
+        "type": "url-test",                      # 免费代理死得快，靠 url-test 自动淘汰、切换
+        "proxies": all_names,
+        "url": args.test_url,
+        "interval": args.interval,
+        "tolerance": args.tolerance,
+    }
+
+    if args.no_region_groups:
+        groups = [{**auto_group, "name": PROXY_GROUP_NAME}]
+    else:
+        groups = [{
+            "name": PROXY_GROUP_NAME,
+            "type": "select",                    # 默认选中 ♻️ 自动选择（即 url-test 自动模式），也可手动锁定某地区
+            "proxies": [AUTO_GROUP_NAME] + [group["label"] for group in region_groups] + ["DIRECT"],
+        }, auto_group]
+        groups.extend({
+            "name": group["label"],
+            "type": "url-test",
+            "proxies": group["names"],
+            "url": args.test_url,
+            "interval": args.interval,
+            "tolerance": args.tolerance,
+        } for group in region_groups)
 
     return {
         "mixed-port": args.port,
@@ -331,25 +473,18 @@ def to_clash(pairs: list, args: argparse.Namespace) -> dict:
         "mode": "rule",
         "log-level": "warning",
         "proxies": proxies,
-        "proxy-groups": [
-            {
-                "name": "PROXY",
-                "type": "url-test",          # 免费代理死得快，靠 url-test 自动淘汰、切换
-                "proxies": names,
-                "url": args.test_url,
-                "interval": args.interval,
-                "tolerance": args.tolerance,
-            }
-        ],
+        "proxy-groups": groups,
         "rules": ["GEOIP,CN,DIRECT", "MATCH,PROXY"],
     }
 
 
 def dump_yaml(config: dict, pairs: list, args: argparse.Namespace) -> str:
+    regions = sorted({region_code(proxy) for proxy, _ in pairs})
     header = [
         "# Clash(Meta) 订阅 - 由 gen_clash.py 自动生成，请勿手工修改",
         f"# 生成时间(UTC): {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}",
-        f"# 节点数: {len(pairs)}  延迟上限: {args.max_delay}ms  策略: TCP 延迟排序取 TOP {args.top_n}",
+        f"# 节点数: {len(pairs)}  地区数: {len(regions)}  延迟上限: {args.max_delay}ms  "
+        f"每地区上限: {args.per_region_top}  总上限: {args.top_n}",
         "",
     ]
     body = yaml.safe_dump(config, allow_unicode=True, sort_keys=False, default_flow_style=False)
@@ -372,10 +507,16 @@ def atomic_write(path: str, text: str) -> None:
 
 
 def print_summary(pairs: list) -> None:
-    log(f"最终节点数: {len(pairs)}，延迟最优 10 个:")
+    regions: dict[str, list] = {}
+    for proxy, delay in pairs:
+        regions.setdefault(region_code(proxy), []).append(delay)
+    log(f"最终节点数: {len(pairs)}，覆盖 {len(regions)} 个国家/地区:")
+    for code, delays in sorted(regions.items(), key=lambda item: (-len(item[1]), min(item[1]))):
+        log(f"  {region_label(code):<12} {len(delays):>3} 个   最快 {min(delays):>5}ms")
+    log("延迟最优 10 个:")
     for proxy, delay in pairs[:10]:
-        log(f"  {proxy.protocol:<7} {proxy.ip}:{proxy.port:<6} {delay:>6}ms  "
-            f"来源 {proxy.source}  匿名度 {proxy.anonymity or '-'}")
+        log(f"  {flag_of(region_code(proxy))} {proxy.ip}:{proxy.port:<6} {delay:>6}ms  "
+            f"{proxy.protocol:<7} 来源 {proxy.source}")
 
 
 # ---------------------------------------------------------------- 主流程
@@ -391,7 +532,7 @@ def main(argv=None) -> int:
     if args.max_http_delay > 0:
         alive = strict_http_filter(alive, args)
 
-    pairs = alive[:max(0, args.top_n)]
+    pairs = select_nodes(alive, args)
     if not pairs and not args.keep_empty:
         log("[error] 没有抓到任何可用节点；为保留上一份可用订阅，本次不写出文件（退出码 1）")
         return 1
