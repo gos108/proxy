@@ -5,6 +5,11 @@ on:
     # 每 3 小时重新抓取一次（与 FlClash 订阅自动更新间隔对齐）
     - cron: "0 */3 * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    # bot 自己提交 clash.yaml 时不再触发，避免自循环
+    paths-ignore:
+      - clash.yaml
 
 permissions:
   contents: write
