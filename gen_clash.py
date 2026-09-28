@@ -105,7 +105,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--output", default="clash.yaml", help="输出的 Clash 配置文件路径")
     parser.add_argument("--port", type=int, default=7890, help="Clash 的 mixed-port")
     parser.add_argument("--test-url", default=HEALTH_CHECK_URL, help="PROXY 分组测速地址")
-    parser.add_argument("--interval", type=int, default=300, help="PROXY 分组测速间隔(秒)")
+    parser.add_argument("--interval", type=int, default=180, help="PROXY 分组测速间隔(秒)")
     parser.add_argument("--tolerance", type=int, default=50, help="PROXY 分组切换容差(毫秒)")
     parser.add_argument("--keep-empty", action="store_true",
                         help="即使一个节点都没抓到也写出文件（默认不覆盖旧文件并退出码 1）")

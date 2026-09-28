@@ -2,8 +2,8 @@ name: update clash.yaml
 
 on:
   schedule:
-    # 每 3 小时重新抓取一次（与 FlClash 订阅自动更新间隔对齐）
-    - cron: "0 */3 * * *"
+    # 每 2 小时重新抓取一次（免费代理寿命小时级；FlClash 订阅自动更新间隔建议设 120 分钟对齐）
+    - cron: "0 */2 * * *"
   workflow_dispatch:
   push:
     branches: [main]
