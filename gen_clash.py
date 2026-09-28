@@ -15,14 +15,21 @@ gen_clash.py —— 抓取免费代理 → 校验存活 → 生成 Clash(Meta) �
     python gen_clash.py --max-delay 2000 --top-n 80    # 更严格的延迟过滤 / 保留更多节点
     python gen_clash.py --max-http-delay 8000          # 额外校验 HTTPS(CONNECT) 隧道能力
     python gen_clash.py --no-region-groups             # 退回「单个 PROXY url-test」的老结构
+    python gen_clash.py --name-style region            # 节点名只留地区+序号（不带质量分/AI 标记）
+    python gen_clash.py --ai-services chatgpt          # 只探测 ChatGPT 连通性
     python gen_clash.py --output /var/www/html/guya/proxy/clash.yaml
 
 生成的分组结构（默认）:
-    PROXY(select) ── 默认选中「♻️ 自动选择」，也可手动锁定某个地区
-      ├─ ♻️ 自动选择(url-test)  = 全部节点自动测速
-      └─ 🇺🇸 美国 / 🇭🇰 中国香港 / 🇯🇵 日本 ...(url-test)  = 各地区节点，按延迟自动选最快
-    节点名形如 "🇺🇸 US-01"，国家码取自各代理源自带字段（缺失的归入 🌐 其他）。
-    默认丢弃 CN 节点（--exclude-regions），因为国内节点延迟最低会被 url-test 长期选中，却没有出境能力。
+    PROXY(select) ── 默认选中「♻️ 自动选择」，也可手动锁定某个地区 / AI 分组
+      ├─ ♻️ 自动选择(url-test)          = 全部节点自动测速
+      ├─ 🤖 ChatGPT / 🎭 Claude / ✨ Gemini(url-test) = 实测能连通对应 AI 服务的节点
+      └─ 🇺🇸 美国 / 🇭🇰 中国香港 / ...(url-test)      = 各地区节点，按质量分自动选最优
+
+    节点名形如 "🇺🇸 US-01 · 92 🤖"：地区 序号 · 质量分 AI 标记（🤖 全通 / 💬 部分通）。
+    质量分 = 40×(1-TCP/上限) + 40×(1-HTTP(S)/上限) + 20×AI 通过比例（未做 HTTP(S) 校验时为 70/0/30）。
+    AI 域名（openai.com/claude.ai/…）已写进 rules，会自动走对应 AI 分组，不用手工切。
+    国家码取自各代理源自带字段（缺失的归入 🌐 其他）；默认丢弃 CN 节点（--exclude-regions），
+    因为国内节点延迟最低会被 url-test 长期选中，却没有出境能力。
 
 说明:
     * 每个代理源在独立子进程里抓取并有硬超时（部分源会做大量 IP 归属地查询，很容易挂住），
@@ -44,6 +51,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 
 try:
+    import requests
     import yaml
     from freeproxy.modules import BuildProxiedSession, ProxiedSessionBuilder, ProxyInfo
 except ImportError as exc:  # pragma: no cover - 依赖缺失时给出明确提示
@@ -126,7 +134,7 @@ COUNTRY_NAMES = {
 def flag_of(code: str) -> str:
     """两位国家码 -> 国旗 emoji（非法码回退到地球）"""
     code = (code or "").strip().upper()
-    if len(code) != 2 or not code.isalpha():
+    if code == "ZZ" or len(code) != 2 or not code.isalpha():
         return "🌐"
     return "".join(chr(0x1F1E6 + ord(char) - ord("A")) for char in code)
 
@@ -141,6 +149,38 @@ def region_label(code: str) -> str:
     if code == "ZZ":
         return UNKNOWN_REGION_LABEL
     return f"{flag_of(code)} {COUNTRY_NAMES.get(code, code)}"
+
+
+# AI 服务连通性探测：走代理请求一次官方 API，能拿到非 5xx 响应即视为「可达」
+AI_SERVICES = {
+    "chatgpt": {
+        "label": "🤖 ChatGPT",
+        "probe": "https://api.openai.com/v1/models",
+        "domains": ["openai.com", "chatgpt.com", "oaistatic.com", "oaiusercontent.com"],
+    },
+    "claude": {
+        "label": "🎭 Claude",
+        "probe": "https://api.anthropic.com/v1/messages",
+        "domains": ["anthropic.com", "claude.ai"],
+    },
+    "gemini": {
+        "label": "✨ Gemini",
+        "probe": "https://generativelanguage.googleapis.com/v1beta/models",
+        "domains": ["generativelanguage.googleapis.com", "gemini.google.com", "ai.google.dev"],
+    },
+}
+
+AI_PROBE_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+               "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+AI_MARK_ALL = "🤖"   # 全部 AI 服务可达
+AI_MARK_PART = "💬"  # 仅部分可达
+
+# 质量评分权重：有 HTTP 实测延迟时三段加权，否则只按 TCP + AI
+SCORE_WEIGHTS_WITH_HTTP = {"tcp": 40, "http": 40, "ai": 20}
+SCORE_WEIGHTS_TCP_ONLY = {"tcp": 70, "http": 0, "ai": 30}
+
+SCORE_FORMULA = ("score = 40×(1-TCP/上限) + 40×(1-HTTP(S)/上限) + 20×AI通过比例；"
+                 "未做 HTTP(S) 校验时为 70/0/30")
 
 
 # ---------------------------------------------------------------- 工具函数
@@ -169,8 +209,16 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--exclude-regions", default="CN",
                         help="直接丢弃的国家/地区码（逗号分隔）。默认丢弃 CN："
                              "国内节点延迟最低，url-test 会一直选中它们，但这类节点没有出境能力")
+    parser.add_argument("--name-style", choices=("region", "score", "full"), default="full",
+                        help="节点名样式：region=🇺🇸 US-01；score=再加质量分；"
+                             "full=再加 AI 标记（🤖 全通 / 💬 部分通）")
     parser.add_argument("--name-with-ip", action="store_true",
                         help="节点名后缀带上 ip:port（默认只显示地区+序号，界面更清爽）")
+    parser.add_argument("--ai-services", default="chatgpt,claude,gemini",
+                        help="要探测连通性的 AI 服务（chatgpt/claude/gemini，逗号分隔，留空或 none 关闭）")
+    parser.add_argument("--ai-timeout", type=float, default=8.0, help="AI 连通性探测超时(秒)")
+    parser.add_argument("--ai-probe-limit", type=int, default=150,
+                        help="最多探测多少个候选节点（按 TCP 延迟从优到劣取，0 表示不限制）")
     parser.add_argument("--max-pages", type=int, default=1, help="每个源的翻页数")
     parser.add_argument("--per-source-limit", type=int, default=300,
                         help="单个源最多保留的候选数，0 表示不限制")
@@ -386,11 +434,106 @@ def strict_http_filter(pairs: list, args: argparse.Namespace) -> list:
     return keep
 
 
+# ---------------------------------------------------------------- 质量评分 / AI 连通性
+
+def score_of(proxy) -> int:
+    return int((getattr(proxy, "extra", None) or {}).get("score", 0))
+
+
+def ai_hits(proxy, services) -> list:
+    result = (getattr(proxy, "extra", None) or {}).get("ai") or {}
+    return [key for key in services if result.get(key)]
+
+
+def ai_mark(proxy, services) -> str:
+    """🤖 = 所有探测的 AI 服务都通；💬 = 只通一部分；空 = 都不通"""
+    if not services:
+        return ""
+    hits = len(ai_hits(proxy, services))
+    if hits == len(services):
+        return AI_MARK_ALL
+    return AI_MARK_PART if hits else ""
+
+
+def compute_score(proxy, delay: int, services, args: argparse.Namespace) -> int:
+    """节点质量评分 0-100：TCP 延迟 + HTTP(S) 延迟 + AI 连通性比例 三段加权"""
+    http_delay = getattr(proxy, "_http_connect_delay", None)
+    weights = SCORE_WEIGHTS_WITH_HTTP if http_delay is not None else SCORE_WEIGHTS_TCP_ONLY
+    tcp_full = max(1, args.max_delay)
+    score = weights["tcp"] * max(0.0, 1 - min(delay, tcp_full) / tcp_full)
+    if http_delay is not None and weights["http"]:
+        http_full = max(1, args.max_http_delay or 8000)
+        score += weights["http"] * max(0.0, 1 - min(http_delay, http_full) / http_full)
+    if services:
+        score += weights["ai"] * len(ai_hits(proxy, services)) / len(services)
+    return int(round(max(0.0, min(100.0, score))))
+
+
+def apply_scores(pairs: list, services, args: argparse.Namespace) -> None:
+    for proxy, delay in pairs:
+        proxy.extra["score"] = compute_score(proxy, delay, services, args)
+
+
+def resolve_ai_services(value: str) -> dict:
+    services = {}
+    for item in (value or "").split(","):
+        key = item.strip().lower()
+        if not key or key == "none":
+            continue
+        if key in AI_SERVICES:
+            services[key] = AI_SERVICES[key]
+        else:
+            log(f"[warn] 未知 AI 服务，已忽略: {key}（可选 {', '.join(AI_SERVICES)}）")
+    return services
+
+
+def probe_ai_once(proxy, url: str, timeout: float) -> bool:
+    try:
+        resp = requests.get(url, proxies=proxy.requests_format_proxy, timeout=timeout,
+                            headers={"User-Agent": AI_PROBE_UA}, allow_redirects=False)
+    except Exception:
+        return False
+    if resp.status_code == 403 and b"unsupported_country" in resp.content[:2000].lower():
+        return False  # OpenAI 明确返回「地区不支持」，说明这个出口用不了
+    return resp.status_code < 500  # 401/403/404 等说明服务可达，只是未授权或被反爬
+
+
+def probe_ai_services(pairs: list, args: argparse.Namespace) -> tuple[list, dict]:
+    """对候选节点逐个探测 AI 服务连通性，结果写进 proxy.extra["ai"]"""
+    services = resolve_ai_services(args.ai_services)
+    for proxy, _ in pairs:
+        proxy.extra.setdefault("ai", {})
+    if not services or not pairs:
+        return pairs, services
+
+    target = pairs if args.ai_probe_limit <= 0 else pairs[:args.ai_probe_limit]
+    log(f"开始 AI 连通性探测：{len(target)} 个节点 × {len(services)} 个服务"
+        f"（{'、'.join(service['label'] for service in services.values())}），"
+        f"并发 40，超时 {args.ai_timeout}s ...")
+    with ThreadPoolExecutor(max_workers=40) as executor:
+        futures = {}
+        for proxy, _ in target:
+            for key, service in services.items():
+                futures[executor.submit(probe_ai_once, proxy, service["probe"], args.ai_timeout)] = (proxy, key)
+        for future in as_completed(futures):
+            proxy, key = futures[future]
+            try:
+                proxy.extra["ai"][key] = bool(future.result())
+            except Exception:
+                proxy.extra["ai"][key] = False
+
+    stats = {key: sum(1 for proxy, _ in target if proxy.extra["ai"].get(key)) for key in services}
+    log("AI 可达统计（共探测 %d 个节点）: %s" % (
+        len(target), "  ".join(f"{services[key]['label']} {count} 个" for key, count in stats.items())))
+    return pairs, services
+
+
 # ---------------------------------------------------------------- 生成
 
 def select_nodes(pairs: list, args: argparse.Namespace) -> list:
-    """先按地区均衡（每个地区最多 per-region-top 个），再按延迟排序截断到 top-n"""
-    pairs = sorted(pairs, key=lambda item: item[1])
+    """先按地区均衡（每个地区最多 per-region-top 个），再按质量评分排序截断到 top-n"""
+    sort_key = lambda item: (-score_of(item[0]), item[1])  # noqa: E731
+    pairs = sorted(pairs, key=sort_key)
     if args.no_region_groups or args.per_region_top <= 0:
         return pairs[:max(0, args.top_n)]
 
@@ -403,25 +546,38 @@ def select_nodes(pairs: list, args: argparse.Namespace) -> list:
         if len(per_region[code]) < args.per_region_top:
             per_region[code].append((proxy, delay))
     kept = [item for code in order for item in per_region[code]]
-    kept.sort(key=lambda item: item[1])
+    kept.sort(key=sort_key)
     return kept[:max(0, args.top_n)]
 
 
-def to_clash(pairs: list, args: argparse.Namespace) -> dict:
-    # 按国家/地区归组，节点名形如 "🇺🇸 US-01"（FlClash 卡片里已单独显示类型与延迟，名字越短越清爽）
+def build_node_name(code: str, index: int, proxy, services, args: argparse.Namespace) -> str:
+    """节点名：🇺🇸 US-01 [· 92] [🤖] [· ip:port]"""
+    name = f"{flag_of(code)} {code}-{index:02d}"
+    if args.name_style in ("score", "full"):
+        name += f" · {score_of(proxy):02d}"
+    if args.name_style == "full":
+        mark = ai_mark(proxy, services)
+        if mark:
+            name += f" {mark}"
+    if args.name_with_ip:
+        name += f" · {proxy.ip}:{proxy.port}"
+    return name
+
+
+def to_clash(pairs: list, args: argparse.Namespace, services: dict | None = None) -> dict:
+    """按国家/地区归组 + AI 服务专用分组；节点名带质量分与 AI 标记"""
+    services = services or {}
     regions: dict[str, list] = {}
     for proxy, delay in pairs:
         regions.setdefault(region_code(proxy), []).append((proxy, delay))
 
-    proxies, region_groups = [], []
+    proxies, entries, region_groups = [], [], []
     for code, items in regions.items():
-        items.sort(key=lambda item: item[1])
+        items.sort(key=lambda item: (-score_of(item[0]), item[1]))  # 组内质量分高的在前
         names = []
         for index, (proxy, _) in enumerate(items, 1):
             protocol = proxy.protocol.lower()
-            name = f"{flag_of(code)} {code}-{index:02d}"
-            if args.name_with_ip:
-                name += f" · {proxy.ip}:{proxy.port}"
+            name = build_node_name(code, index, proxy, services, args)
             node = {
                 "name": name,
                 "type": "socks5" if protocol == "socks5" else "http",
@@ -433,39 +589,58 @@ def to_clash(pairs: list, args: argparse.Namespace) -> dict:
             if protocol == "https":
                 node["tls"] = True
             proxies.append(node)
+            entries.append((name, proxy))
             names.append(name)
         region_groups.append({"code": code, "label": region_label(code),
                               "names": names, "best": items[0][1]})
 
+    # AI 专用分组：只有至少一个节点可达时才建，避免 rules 引用到不存在的分组
+    ai_groups = []
+    for key, service in services.items():
+        names = [name for name, proxy in entries if (proxy.extra.get("ai") or {}).get(key)]
+        if names:
+            ai_groups.append({"key": key, "label": service["label"], "names": names})
+
     # 地区分组：节点多的排前面，同数量时最优延迟小的在前
     region_groups.sort(key=lambda group: (-len(group["names"]), group["best"]))
 
-    all_names = [node["name"] for node in proxies]
     auto_group = {
         "name": AUTO_GROUP_NAME,
         "type": "url-test",                      # 免费代理死得快，靠 url-test 自动淘汰、切换
-        "proxies": all_names,
+        "proxies": [name for name, _ in entries],
         "url": args.test_url,
         "interval": args.interval,
         "tolerance": args.tolerance,
     }
 
     if args.no_region_groups:
-        groups = [{**auto_group, "name": PROXY_GROUP_NAME}]
+        groups = [{**auto_group, "name": PROXY_GROUP_NAME}] + [
+            {"name": group["label"], "type": "url-test", "proxies": group["names"],
+             "url": args.test_url, "interval": args.interval, "tolerance": args.tolerance}
+            for group in ai_groups
+        ]
     else:
         groups = [{
             "name": PROXY_GROUP_NAME,
-            "type": "select",                    # 默认选中 ♻️ 自动选择（即 url-test 自动模式），也可手动锁定某地区
-            "proxies": [AUTO_GROUP_NAME] + [group["label"] for group in region_groups] + ["DIRECT"],
+            "type": "select",                    # 默认选中 ♻️ 自动选择（url-test 自动模式），也可手动锁定地区/AI 分组
+            "proxies": [AUTO_GROUP_NAME] + [group["label"] for group in ai_groups]
+                        + [group["label"] for group in region_groups] + ["DIRECT"],
         }, auto_group]
         groups.extend({
-            "name": group["label"],
-            "type": "url-test",
-            "proxies": group["names"],
-            "url": args.test_url,
-            "interval": args.interval,
-            "tolerance": args.tolerance,
+            "name": group["label"], "type": "url-test", "proxies": group["names"],
+            "url": args.test_url, "interval": args.interval, "tolerance": args.tolerance,
+        } for group in ai_groups)
+        groups.extend({
+            "name": group["label"], "type": "url-test", "proxies": group["names"],
+            "url": args.test_url, "interval": args.interval, "tolerance": args.tolerance,
         } for group in region_groups)
+
+    # AI 域名直接分流到「真的能连通该服务」的分组，不用手工切
+    rules = []
+    for group in ai_groups:
+        for domain in services[group["key"]]["domains"]:
+            rules.append(f"DOMAIN-SUFFIX,{domain},{group['label']}")
+    rules.extend(["GEOIP,CN,DIRECT", "MATCH,PROXY"])
 
     return {
         "mixed-port": args.port,
@@ -474,19 +649,27 @@ def to_clash(pairs: list, args: argparse.Namespace) -> dict:
         "log-level": "warning",
         "proxies": proxies,
         "proxy-groups": groups,
-        "rules": ["GEOIP,CN,DIRECT", "MATCH,PROXY"],
+        "rules": rules,
     }
 
 
-def dump_yaml(config: dict, pairs: list, args: argparse.Namespace) -> str:
+def dump_yaml(config: dict, pairs: list, args: argparse.Namespace, services: dict | None = None) -> str:
     regions = sorted({region_code(proxy) for proxy, _ in pairs})
     header = [
         "# Clash(Meta) 订阅 - 由 gen_clash.py 自动生成，请勿手工修改",
         f"# 生成时间(UTC): {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}",
         f"# 节点数: {len(pairs)}  地区数: {len(regions)}  延迟上限: {args.max_delay}ms  "
         f"每地区上限: {args.per_region_top}  总上限: {args.top_n}",
-        "",
+        f"# 节点名含义: 地区 序号 · 质量分 ({SCORE_FORMULA})，🤖=AI 服务全通 💬=部分通",
     ]
+    if services:
+        stats = []
+        for key, service in services.items():
+            count = sum(1 for proxy, _ in pairs if (proxy.extra.get("ai") or {}).get(key))
+            stats.append(f"{service['label']} {count} 个")
+        if stats:
+            header.append("# 本订阅内 AI 连通性: " + "  ".join(stats))
+    header.append("")
     body = yaml.safe_dump(config, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return "\n".join(header) + body
 
@@ -506,17 +689,21 @@ def atomic_write(path: str, text: str) -> None:
         raise
 
 
-def print_summary(pairs: list) -> None:
+def print_summary(pairs: list, services: dict | None = None) -> None:
+    services = services or {}
     regions: dict[str, list] = {}
     for proxy, delay in pairs:
         regions.setdefault(region_code(proxy), []).append(delay)
     log(f"最终节点数: {len(pairs)}，覆盖 {len(regions)} 个国家/地区:")
     for code, delays in sorted(regions.items(), key=lambda item: (-len(item[1]), min(item[1]))):
         log(f"  {region_label(code):<12} {len(delays):>3} 个   最快 {min(delays):>5}ms")
-    log("延迟最优 10 个:")
+    for key, service in services.items():
+        count = sum(1 for proxy, _ in pairs if (proxy.extra.get("ai") or {}).get(key))
+        log(f"  {service['label']} 可达 {count} 个   分组: {service['label']}(url-test)")
+    log("质量分最高的 10 个:")
     for proxy, delay in pairs[:10]:
-        log(f"  {flag_of(region_code(proxy))} {proxy.ip}:{proxy.port:<6} {delay:>6}ms  "
-            f"{proxy.protocol:<7} 来源 {proxy.source}")
+        log(f"  {flag_of(region_code(proxy))} {proxy.ip}:{proxy.port:<6} {delay:>5}ms  "
+            f"{score_of(proxy):>3}分  {proxy.protocol:<7} {ai_mark(proxy, services):<2} 来源 {proxy.source}")
 
 
 # ---------------------------------------------------------------- 主流程
@@ -532,15 +719,18 @@ def main(argv=None) -> int:
     if args.max_http_delay > 0:
         alive = strict_http_filter(alive, args)
 
+    alive, ai_services = probe_ai_services(alive, args)  # 只探测延迟较优的候选，控制耗时
+    apply_scores(alive, ai_services, args)               # 质量评分（TCP + HTTP(S) + AI）
+
     pairs = select_nodes(alive, args)
     if not pairs and not args.keep_empty:
         log("[error] 没有抓到任何可用节点；为保留上一份可用订阅，本次不写出文件（退出码 1）")
         return 1
 
-    config = to_clash(pairs, args)
-    atomic_write(args.output, dump_yaml(config, pairs, args))
+    config = to_clash(pairs, args, ai_services)
+    atomic_write(args.output, dump_yaml(config, pairs, args, ai_services))
 
-    print_summary(pairs)
+    print_summary(pairs, ai_services)
     log(f"生成完成: {len(pairs)} 个节点 -> {os.path.abspath(args.output)}"
         f"（总用时 {time.monotonic() - started:.1f}s）")
     if not pairs:
