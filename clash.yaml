@@ -1,299 +1,348 @@
 # Clash(Meta) 订阅 - 由 gen_clash.py 自动生成，请勿手工修改
-# 生成时间(UTC): 2026-11-22 06:50:04
-# 节点数: 64  地区数: 25  延迟上限: 3000ms  每地区上限: 6  总上限: 80
+# 生成时间(UTC): 2026-11-23 07:40:30
+# 节点数: 75  地区数: 27  延迟上限: 3000ms  每地区上限: 6  总上限: 80
 # 节点名含义: 地区 序号 · 质量分 (score = 40×(1-TCP/上限) + 40×(1-HTTP(S)/上限) + 20×AI通过比例；未做 HTTP(S) 校验时为 70/0/30)，🤖=AI 服务全通 💬=部分通
-# 本订阅内 AI 连通性: 🤖 ChatGPT 45 个  🎭 Claude 43 个  ✨ Gemini 44 个
+# 本订阅内 AI 连通性: 🤖 ChatGPT 56 个  🎭 Claude 59 个  ✨ Gemini 64 个
 mixed-port: 7890
 allow-lan: false
 mode: rule
 log-level: warning
 proxies:
-- name: 🇺🇸 US-01 · 96 🤖
-  type: http
-  server: 20.98.234.24
-  port: 8080
-- name: 🇺🇸 US-02 · 95 🤖
+- name: 🇺🇸 US-01 · 95 🤖
   type: http
   server: 50.238.106.26
   port: 3128
-- name: 🇺🇸 US-03 · 95 🤖
+- name: 🇺🇸 US-02 · 95 🤖
   type: http
-  server: 18.222.225.236
-  port: 3128
-- name: 🇺🇸 US-04 · 95 🤖
-  type: http
-  server: 47.77.214.110
-  port: 80
-- name: 🇺🇸 US-05 · 94 🤖
+  server: 20.98.234.24
+  port: 8080
+- name: 🇺🇸 US-03 · 94 🤖
   type: socks5
-  server: 47.251.249.48
-  port: 7777
+  server: 107.174.30.93
+  port: 1080
   udp: true
-- name: 🇺🇸 US-06 · 93 🤖
+- name: 🇺🇸 US-04 · 93 🤖
   type: socks5
   server: 69.55.49.177
   port: 38182
   udp: true
-- name: 🇬🇧 GB-01 · 93 🤖
-  type: http
-  server: 159.65.27.1
-  port: 10000
-- name: 🇬🇧 GB-02 · 91 🤖
+- name: 🇺🇸 US-05 · 93 🤖
   type: socks5
-  server: 46.101.21.9
-  port: 10000
+  server: 45.61.188.134
+  port: 44499
   udp: true
-- name: 🇬🇧 GB-03 · 73
+- name: 🇺🇸 US-06 · 93 🤖
   type: http
-  server: 81.19.210.10
-  port: 80
-- name: 🇬🇧 GB-04 · 72
-  type: http
-  server: 104.194.146.9
-  port: 80
-- name: 🇬🇧 GB-05 · 72
-  type: socks5
-  server: 134.209.29.120
-  port: 1080
-  udp: true
-- name: 🇩🇪 DE-01 · 93 🤖
-  type: http
-  server: 13.140.25.214
+  server: 216.125.18.67
   port: 3128
-- name: 🇩🇪 DE-02 · 93 🤖
-  type: http
-  server: 168.119.187.186
-  port: 3128
-- name: 🇩🇪 DE-03 · 93 🤖
-  type: http
-  server: 103.237.102.191
-  port: 11111
-- name: 🇩🇪 DE-04 · 92 🤖
-  type: http
-  server: 5.75.173.39
-  port: 3128
-- name: 🇩🇪 DE-05 · 90 🤖
-  type: http
-  server: 217.154.195.87
-  port: 8888
-- name: 🇩🇪 DE-06 · 89 🤖
-  type: socks5
-  server: 91.107.179.68
-  port: 10809
-  udp: true
-- name: 🇪🇸 ES-01 · 92 🤖
-  type: http
-  server: 51.49.207.39
-  port: 3128
-- name: 🇺🇦 UA-01 · 91 🤖
-  type: http
-  server: 176.111.37.5
-  port: 39811
-- name: 🇺🇦 UA-02 · 61 🤖
-  type: socks5
-  server: 193.218.118.128
-  port: 1080
-  udp: true
-- name: 🇯🇵 JP-01 · 91 🤖
-  type: socks5
-  server: 101.36.104.239
-  port: 10808
-  udp: true
-- name: 🇯🇵 JP-02 · 69
+- name: 🇯🇵 JP-01 · 93 🤖
   type: socks5
   server: 101.36.104.46
   port: 10808
   udp: true
-- name: 🇸🇬 SG-01 · 91 🤖
-  type: http
-  server: 4.144.146.21
-  port: 80
-- name: 🇪🇬 EG-01 · 90 🤖
-  type: http
-  server: 41.196.16.228
-  port: 1976
-- name: 🇪🇬 EG-02 · 84 💬
-  type: http
-  server: 213.131.85.28
-  port: 1981
-- name: 🇪🇬 EG-03 · 77 💬
-  type: http
-  server: 41.196.16.228
-  port: 1981
-- name: 🇪🇬 EG-04 · 74 💬
-  type: http
-  server: 41.65.103.168
-  port: 8080
-- name: 🇳🇱 NL-01 · 86 🤖
+- name: 🇯🇵 JP-02 · 93 🤖
   type: socks5
-  server: 45.74.31.46
-  port: 4046
+  server: 101.36.104.239
+  port: 10808
   udp: true
-- name: 🇳🇱 NL-02 · 83 🤖
+- name: 🇯🇵 JP-03 · 89 🤖
   type: socks5
-  server: 45.74.31.41
-  port: 4249
+  server: 103.13.19.219
+  port: 10808
   udp: true
-- name: 🇳🇱 NL-03 · 77 🤖
+- name: 🇯🇵 JP-04 · 71
   type: socks5
-  server: 45.74.31.41
-  port: 4287
-  udp: true
-- name: 🇳🇱 NL-04 · 71 💬
-  type: socks5
-  server: 45.74.31.40
-  port: 4498
-  udp: true
-- name: 🇳🇱 NL-05 · 70
-  type: socks5
-  server: 45.74.31.40
-  port: 4068
-  udp: true
-- name: 🇳🇱 NL-06 · 67 🤖
-  type: socks5
-  server: 45.74.31.46
-  port: 4177
-  udp: true
-- name: 🇫🇮 FI-01 · 85 🤖
-  type: socks5
-  server: 65.108.151.224
+  server: 139.162.78.109
   port: 1080
   udp: true
-- name: 🇦🇷 AR-01 · 85 🤖
+- name: 🇨🇴 CO-01 · 92 🤖
   type: http
-  server: 190.123.83.137
-  port: 999
-- name: 🇦🇷 AR-02 · 77 💬
+  server: 158.247.125.5
+  port: 9443
+- name: 🇨🇴 CO-02 · 38 💬
   type: http
-  server: 186.33.41.48
+  server: 179.1.182.28
   port: 999
-- name: 🇦🇷 AR-03 · 38
+- name: 🇬🇧 GB-01 · 92 🤖
   type: http
-  server: 186.33.42.171
-  port: 999
-- name: 🇰🇷 KR-01 · 85 🤖
+  server: 159.65.27.1
+  port: 10000
+- name: 🇬🇧 GB-02 · 91 🤖
+  type: http
+  server: 81.19.210.10
+  port: 80
+- name: 🇬🇧 GB-03 · 91 🤖
+  type: http
+  server: 46.101.21.9
+  port: 10000
+- name: 🇬🇧 GB-04 · 89 🤖
+  type: http
+  server: 104.194.146.9
+  port: 80
+- name: 🇨🇭 CH-01 · 92 🤖
+  type: http
+  server: 185.191.239.248
+  port: 3128
+- name: 🇨🇭 CH-02 · 82 🤖
+  type: http
+  server: 147.161.246.34
+  port: 11092
+- name: 🇨🇭 CH-03 · 81 🤖
+  type: http
+  server: 147.161.246.34
+  port: 10821
+- name: 🇨🇭 CH-04 · 81 🤖
+  type: http
+  server: 147.161.246.34
+  port: 12845
+- name: 🇨🇭 CH-05 · 80 🤖
+  type: http
+  server: 147.161.246.34
+  port: 12611
+- name: 🇨🇭 CH-06 · 80 🤖
+  type: http
+  server: 147.161.246.34
+  port: 12327
+- name: 🇰🇷 KR-01 · 92 🤖
+  type: socks5
+  server: 43.155.128.61
+  port: 1080
+  udp: true
+- name: 🇰🇷 KR-02 · 71 🤖
   type: socks5
   server: 183.106.215.208
   port: 1080
   udp: true
-- name: 🇭🇰 HK-01 · 83 💬
+- name: 🇸🇬 SG-01 · 92 🤖
+  type: http
+  server: 4.144.146.21
+  port: 80
+- name: 🇸🇬 SG-02 · 78 🤖
+  type: socks5
+  server: 8.219.122.8
+  port: 9999
+  udp: true
+- name: 🇸🇬 SG-03 · 71
+  type: socks5
+  server: 128.199.202.122
+  port: 1080
+  udp: true
+- name: 🇭🇰 HK-01 · 91 🤖
+  type: http
+  server: 45.155.226.177
+  port: 3128
+- name: 🇭🇰 HK-02 · 86 💬
   type: socks5
   server: 123.58.219.171
   port: 10808
   udp: true
-- name: 🇦🇺 AU-01 · 83 🤖
+- name: 🇭🇰 HK-03 · 85 💬
   type: socks5
-  server: 157.85.98.41
-  port: 10802
+  server: 219.78.223.199
+  port: 5001
   udp: true
-- name: 🇸🇨 SC-01 · 79 🤖
+- name: 🇭🇰 HK-04 · 55 💬
   type: socks5
-  server: 31.56.19.26
+  server: 47.76.227.81
+  port: 6002
+  udp: true
+- name: 🇩🇪 DE-01 · 91 🤖
+  type: http
+  server: 103.237.102.191
+  port: 11111
+- name: 🇩🇪 DE-02 · 91 🤖
+  type: http
+  server: 5.75.173.39
+  port: 3128
+- name: 🇩🇪 DE-03 · 90 🤖
+  type: socks5
+  server: 176.9.107.170
+  port: 1081
+  udp: true
+- name: 🇩🇪 DE-04 · 85 💬
+  type: http
+  server: 46.232.249.209
+  port: 40001
+- name: 🇩🇪 DE-05 · 83 🤖
+  type: socks5
+  server: 49.13.22.249
+  port: 10805
+  udp: true
+- name: 🇩🇪 DE-06 · 79 💬
+  type: socks5
+  server: 5.75.133.113
+  port: 10806
+  udp: true
+- name: 🇺🇦 UA-01 · 91 🤖
+  type: http
+  server: 176.111.37.5
+  port: 39811
+- name: 🇺🇦 UA-02 · 85 🤖
+  type: socks5
+  server: 193.218.118.128
   port: 1080
   udp: true
-- name: 🇷🇺 RU-01 · 79 🤖
-  type: socks5
-  server: 188.226.27.24
-  port: 1080
-  udp: true
-- name: 🇷🇺 RU-02 · 69
-  type: socks5
-  server: 93.100.74.173
-  port: 8088
-  udp: true
-- name: 🇷🇺 RU-03 · 67 💬
-  type: socks5
-  server: 93.90.231.101
-  port: 1080
-  udp: true
-- name: 🇨🇦 CA-01 · 78 💬
-  type: socks5
-  server: 38.49.210.79
-  port: 40000
-  udp: true
-- name: 🇨🇦 CA-02 · 73
-  type: socks5
-  server: 159.203.61.169
-  port: 1080
-  udp: true
-- name: 🇮🇳 IN-01 · 76 💬
+- name: 🇫🇷 FR-01 · 90 🤖
   type: http
-  server: 45.194.90.225
-  port: 8080
-- name: 🇮🇳 IN-02 · 64
+  server: 51.68.102.5
+  port: 3130
+- name: 🇳🇱 NL-01 · 90 🤖
+  type: http
+  server: 144.124.251.24
+  port: 10512
+- name: 🇳🇱 NL-02 · 90 🤖
+  type: http
+  server: 144.124.251.24
+  port: 10526
+- name: 🇳🇱 NL-03 · 89 🤖
+  type: http
+  server: 144.124.251.24
+  port: 10261
+- name: 🇳🇱 NL-04 · 89 🤖
+  type: http
+  server: 144.124.251.24
+  port: 10009
+- name: 🇳🇱 NL-05 · 89 🤖
+  type: http
+  server: 144.124.251.24
+  port: 10164
+- name: 🇳🇱 NL-06 · 89 🤖
+  type: http
+  server: 144.124.251.24
+  port: 10333
+- name: 🇨🇿 CZ-01 · 88 🤖
   type: socks5
-  server: 80.225.224.2
-  port: 10808
+  server: 91.199.137.149
+  port: 2005
   udp: true
-- name: 🇨🇭 CH-01 · 74 🤖
-  type: http
-  server: 147.161.246.34
-  port: 11516
-- name: 🇨🇭 CH-02 · 73 🤖
-  type: http
-  server: 147.161.246.34
-  port: 10636
-- name: 🇨🇭 CH-03 · 73 🤖
-  type: http
-  server: 147.161.246.34
-  port: 10615
-- name: 🇨🇭 CH-04 · 73 🤖
-  type: http
-  server: 147.161.246.34
-  port: 10825
-- name: 🇨🇭 CH-05 · 71 🤖
-  type: http
-  server: 147.161.246.34
-  port: 10588
-- name: 🇧🇩 BD-01 · 73 💬
+- name: 🇨🇿 CZ-02 · 88 🤖
   type: socks5
-  server: 203.76.123.6
-  port: 1080
+  server: 91.199.137.149
+  port: 2001
   udp: true
-- name: 🇧🇩 BD-02 · 60 💬
-  type: socks5
-  server: 202.4.101.249
-  port: 9090
-  udp: true
-- name: 🇧🇩 BD-03 · 46
-  type: http
-  server: 115.127.166.86
-  port: 8080
-- name: 🇧🇩 BD-04 · 29 💬
-  type: socks5
-  server: 61.247.178.146
-  port: 1080
-  udp: true
-- name: 🇸🇪 SE-01 · 69 🤖
+- name: 🇸🇪 SE-01 · 87 🤖
   type: socks5
   server: 171.25.158.95
   port: 1080
   udp: true
-- name: 🇸🇪 SE-02 · 54 🤖
+- name: 🇸🇪 SE-02 · 76 💬
+  type: http
+  server: 89.169.35.179
+  port: 8080
+- name: 🇸🇪 SE-03 · 76 🤖
   type: socks5
   server: 46.246.12.31
   port: 1080
   udp: true
-- name: 🇮🇷 IR-01 · 64
+- name: 🇨🇲 CM-01 · 86 🤖
+  type: http
+  server: 102.244.78.61
+  port: 8089
+- name: 🇮🇳 IN-01 · 86 🤖
   type: socks5
-  server: 94.183.150.152
+  server: 34.131.151.65
   port: 1080
   udp: true
-- name: 🇳🇮 NI-01 · 54
+- name: 🇮🇳 IN-02 · 82 🤖
+  type: socks5
+  server: 82.180.146.251
+  port: 10800
+  udp: true
+- name: 🇪🇬 EG-01 · 83 💬
   type: http
-  server: 143.202.254.50
+  server: 41.196.16.228
+  port: 1976
+- name: 🇪🇬 EG-02 · 83 💬
+  type: http
+  server: 41.196.16.228
+  port: 1981
+- name: 🇷🇺 RU-01 · 83 🤖
+  type: socks5
+  server: 37.18.73.60
+  port: 5566
+  udp: true
+- name: 🇷🇺 RU-02 · 81 💬
+  type: http
+  server: 193.124.33.31
+  port: 2052
+- name: 🇷🇺 RU-03 · 74 💬
+  type: socks5
+  server: 87.229.236.151
+  port: 1080
+  udp: true
+- name: 🇷🇺 RU-04 · 72 💬
+  type: socks5
+  server: 176.115.192.185
+  port: 1080
+  udp: true
+- name: 🇷🇺 RU-05 · 72 💬
+  type: socks5
+  server: 79.135.226.14
+  port: 1080
+  udp: true
+- name: 🇷🇺 RU-06 · 67
+  type: socks5
+  server: 134.19.149.8
+  port: 1080
+  udp: true
+- name: 🇨🇦 CA-01 · 78 🤖
+  type: socks5
+  server: 38.49.210.79
+  port: 40000
+  udp: true
+- name: 🇻🇪 VE-01 · 78 💬
+  type: http
+  server: 38.183.215.197
+  port: 8080
+- name: 🇫🇮 FI-01 · 78 🤖
+  type: socks5
+  server: 65.21.252.66
+  port: 10811
+  udp: true
+- name: 🇫🇮 FI-02 · 71 🤖
+  type: socks5
+  server: 65.21.252.66
+  port: 10808
+  udp: true
+- name: 🇪🇪 EE-01 · 74 💬
+  type: socks5
+  server: 132.243.168.30
+  port: 9150
+  udp: true
+- name: 🇲🇽 MX-01 · 73
+  type: http
+  server: 170.78.208.28
   port: 999
-- name: 🇲🇽 MX-01 · 54 💬
+- name: 🇰🇭 KH-01 · 66 💬
+  type: socks5
+  server: 220.158.232.118
+  port: 1080
+  udp: true
+- name: 🇵🇪 PE-01 · 61 💬
   type: http
-  server: 38.58.174.8
-  port: 999
-- name: 🇲🇽 MX-02 · 51 💬
+  server: 190.235.208.209
+  port: 8080
+- name: 🇵🇭 PH-01 · 57 🤖
+  type: socks5
+  server: 103.239.201.50
+  port: 58765
+  udp: true
+- name: 🇮🇩 ID-01 · 54
   type: http
-  server: 38.210.179.50
-  port: 999
-- name: 🇹🇷 TR-01 · 43
+  server: 103.213.131.79
+  port: 8085
+- name: 🇮🇩 ID-02 · 47
   type: http
-  server: 188.132.150.149
+  server: 103.144.90.138
+  port: 808
+- name: 🇮🇩 ID-03 · 38 💬
+  type: socks5
+  server: 103.103.146.149
+  port: 7080
+  udp: true
+- name: 🇮🇩 ID-04 · 31 💬
+  type: http
+  server: 103.215.187.67
   port: 8080
 proxy-groups:
 - name: PROXY
@@ -304,352 +353,450 @@ proxy-groups:
   - 🎭 Claude
   - ✨ Gemini
   - 🇺🇸 美国
+  - 🇨🇭 瑞士
   - 🇩🇪 德国
   - 🇳🇱 荷兰
-  - 🇬🇧 英国
-  - 🇨🇭 瑞士
-  - 🇪🇬 埃及
-  - 🇧🇩 孟加拉国
-  - 🇦🇷 阿根廷
   - 🇷🇺 俄罗斯
-  - 🇨🇦 加拿大
-  - 🇺🇦 乌克兰
-  - 🇯🇵 日本
-  - 🇮🇳 印度
-  - 🇸🇪 瑞典
-  - 🇲🇽 墨西哥
-  - 🇳🇮 NI
-  - 🇪🇸 西班牙
-  - 🇸🇨 塞舌尔
-  - 🇫🇮 芬兰
-  - 🇹🇷 土耳其
-  - 🇰🇷 韩国
-  - 🇮🇷 伊朗
+  - 🇬🇧 英国
   - 🇭🇰 中国香港
+  - 🇯🇵 日本
+  - 🇮🇩 印度尼西亚
+  - 🇸🇪 瑞典
   - 🇸🇬 新加坡
-  - 🇦🇺 澳大利亚
+  - 🇨🇴 哥伦比亚
+  - 🇨🇿 捷克
+  - 🇫🇮 芬兰
+  - 🇺🇦 乌克兰
+  - 🇪🇬 埃及
+  - 🇰🇷 韩国
+  - 🇮🇳 印度
+  - 🇨🇦 加拿大
+  - 🇲🇽 墨西哥
+  - 🇻🇪 委内瑞拉
+  - 🇫🇷 法国
+  - 🇪🇪 爱沙尼亚
+  - 🇵🇪 秘鲁
+  - 🇨🇲 喀麦隆
+  - 🇰🇭 柬埔寨
+  - 🇵🇭 菲律宾
   - DIRECT
 - name: ♻️ 自动选择
   type: url-test
   proxies:
-  - 🇺🇸 US-01 · 96 🤖
+  - 🇺🇸 US-01 · 95 🤖
   - 🇺🇸 US-02 · 95 🤖
-  - 🇺🇸 US-03 · 95 🤖
-  - 🇺🇸 US-04 · 95 🤖
-  - 🇺🇸 US-05 · 94 🤖
+  - 🇺🇸 US-03 · 94 🤖
+  - 🇺🇸 US-04 · 93 🤖
+  - 🇺🇸 US-05 · 93 🤖
   - 🇺🇸 US-06 · 93 🤖
-  - 🇬🇧 GB-01 · 93 🤖
+  - 🇯🇵 JP-01 · 93 🤖
+  - 🇯🇵 JP-02 · 93 🤖
+  - 🇯🇵 JP-03 · 89 🤖
+  - 🇯🇵 JP-04 · 71
+  - 🇨🇴 CO-01 · 92 🤖
+  - 🇨🇴 CO-02 · 38 💬
+  - 🇬🇧 GB-01 · 92 🤖
   - 🇬🇧 GB-02 · 91 🤖
-  - 🇬🇧 GB-03 · 73
-  - 🇬🇧 GB-04 · 72
-  - 🇬🇧 GB-05 · 72
-  - 🇩🇪 DE-01 · 93 🤖
-  - 🇩🇪 DE-02 · 93 🤖
-  - 🇩🇪 DE-03 · 93 🤖
-  - 🇩🇪 DE-04 · 92 🤖
-  - 🇩🇪 DE-05 · 90 🤖
-  - 🇩🇪 DE-06 · 89 🤖
-  - 🇪🇸 ES-01 · 92 🤖
+  - 🇬🇧 GB-03 · 91 🤖
+  - 🇬🇧 GB-04 · 89 🤖
+  - 🇨🇭 CH-01 · 92 🤖
+  - 🇨🇭 CH-02 · 82 🤖
+  - 🇨🇭 CH-03 · 81 🤖
+  - 🇨🇭 CH-04 · 81 🤖
+  - 🇨🇭 CH-05 · 80 🤖
+  - 🇨🇭 CH-06 · 80 🤖
+  - 🇰🇷 KR-01 · 92 🤖
+  - 🇰🇷 KR-02 · 71 🤖
+  - 🇸🇬 SG-01 · 92 🤖
+  - 🇸🇬 SG-02 · 78 🤖
+  - 🇸🇬 SG-03 · 71
+  - 🇭🇰 HK-01 · 91 🤖
+  - 🇭🇰 HK-02 · 86 💬
+  - 🇭🇰 HK-03 · 85 💬
+  - 🇭🇰 HK-04 · 55 💬
+  - 🇩🇪 DE-01 · 91 🤖
+  - 🇩🇪 DE-02 · 91 🤖
+  - 🇩🇪 DE-03 · 90 🤖
+  - 🇩🇪 DE-04 · 85 💬
+  - 🇩🇪 DE-05 · 83 🤖
+  - 🇩🇪 DE-06 · 79 💬
   - 🇺🇦 UA-01 · 91 🤖
-  - 🇺🇦 UA-02 · 61 🤖
-  - 🇯🇵 JP-01 · 91 🤖
-  - 🇯🇵 JP-02 · 69
-  - 🇸🇬 SG-01 · 91 🤖
-  - 🇪🇬 EG-01 · 90 🤖
-  - 🇪🇬 EG-02 · 84 💬
-  - 🇪🇬 EG-03 · 77 💬
-  - 🇪🇬 EG-04 · 74 💬
-  - 🇳🇱 NL-01 · 86 🤖
-  - 🇳🇱 NL-02 · 83 🤖
-  - 🇳🇱 NL-03 · 77 🤖
-  - 🇳🇱 NL-04 · 71 💬
-  - 🇳🇱 NL-05 · 70
-  - 🇳🇱 NL-06 · 67 🤖
-  - 🇫🇮 FI-01 · 85 🤖
-  - 🇦🇷 AR-01 · 85 🤖
-  - 🇦🇷 AR-02 · 77 💬
-  - 🇦🇷 AR-03 · 38
-  - 🇰🇷 KR-01 · 85 🤖
-  - 🇭🇰 HK-01 · 83 💬
-  - 🇦🇺 AU-01 · 83 🤖
-  - 🇸🇨 SC-01 · 79 🤖
-  - 🇷🇺 RU-01 · 79 🤖
-  - 🇷🇺 RU-02 · 69
-  - 🇷🇺 RU-03 · 67 💬
-  - 🇨🇦 CA-01 · 78 💬
-  - 🇨🇦 CA-02 · 73
-  - 🇮🇳 IN-01 · 76 💬
-  - 🇮🇳 IN-02 · 64
-  - 🇨🇭 CH-01 · 74 🤖
-  - 🇨🇭 CH-02 · 73 🤖
-  - 🇨🇭 CH-03 · 73 🤖
-  - 🇨🇭 CH-04 · 73 🤖
-  - 🇨🇭 CH-05 · 71 🤖
-  - 🇧🇩 BD-01 · 73 💬
-  - 🇧🇩 BD-02 · 60 💬
-  - 🇧🇩 BD-03 · 46
-  - 🇧🇩 BD-04 · 29 💬
-  - 🇸🇪 SE-01 · 69 🤖
-  - 🇸🇪 SE-02 · 54 🤖
-  - 🇮🇷 IR-01 · 64
-  - 🇳🇮 NI-01 · 54
-  - 🇲🇽 MX-01 · 54 💬
-  - 🇲🇽 MX-02 · 51 💬
-  - 🇹🇷 TR-01 · 43
+  - 🇺🇦 UA-02 · 85 🤖
+  - 🇫🇷 FR-01 · 90 🤖
+  - 🇳🇱 NL-01 · 90 🤖
+  - 🇳🇱 NL-02 · 90 🤖
+  - 🇳🇱 NL-03 · 89 🤖
+  - 🇳🇱 NL-04 · 89 🤖
+  - 🇳🇱 NL-05 · 89 🤖
+  - 🇳🇱 NL-06 · 89 🤖
+  - 🇨🇿 CZ-01 · 88 🤖
+  - 🇨🇿 CZ-02 · 88 🤖
+  - 🇸🇪 SE-01 · 87 🤖
+  - 🇸🇪 SE-02 · 76 💬
+  - 🇸🇪 SE-03 · 76 🤖
+  - 🇨🇲 CM-01 · 86 🤖
+  - 🇮🇳 IN-01 · 86 🤖
+  - 🇮🇳 IN-02 · 82 🤖
+  - 🇪🇬 EG-01 · 83 💬
+  - 🇪🇬 EG-02 · 83 💬
+  - 🇷🇺 RU-01 · 83 🤖
+  - 🇷🇺 RU-02 · 81 💬
+  - 🇷🇺 RU-03 · 74 💬
+  - 🇷🇺 RU-04 · 72 💬
+  - 🇷🇺 RU-05 · 72 💬
+  - 🇷🇺 RU-06 · 67
+  - 🇨🇦 CA-01 · 78 🤖
+  - 🇻🇪 VE-01 · 78 💬
+  - 🇫🇮 FI-01 · 78 🤖
+  - 🇫🇮 FI-02 · 71 🤖
+  - 🇪🇪 EE-01 · 74 💬
+  - 🇲🇽 MX-01 · 73
+  - 🇰🇭 KH-01 · 66 💬
+  - 🇵🇪 PE-01 · 61 💬
+  - 🇵🇭 PH-01 · 57 🤖
+  - 🇮🇩 ID-01 · 54
+  - 🇮🇩 ID-02 · 47
+  - 🇮🇩 ID-03 · 38 💬
+  - 🇮🇩 ID-04 · 31 💬
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
 - name: 🤖 ChatGPT
   type: url-test
   proxies:
-  - 🇺🇸 US-01 · 96 🤖
+  - 🇺🇸 US-01 · 95 🤖
   - 🇺🇸 US-02 · 95 🤖
-  - 🇺🇸 US-03 · 95 🤖
-  - 🇺🇸 US-04 · 95 🤖
-  - 🇺🇸 US-05 · 94 🤖
+  - 🇺🇸 US-03 · 94 🤖
+  - 🇺🇸 US-04 · 93 🤖
+  - 🇺🇸 US-05 · 93 🤖
   - 🇺🇸 US-06 · 93 🤖
-  - 🇬🇧 GB-01 · 93 🤖
+  - 🇯🇵 JP-01 · 93 🤖
+  - 🇯🇵 JP-02 · 93 🤖
+  - 🇯🇵 JP-03 · 89 🤖
+  - 🇨🇴 CO-01 · 92 🤖
+  - 🇬🇧 GB-01 · 92 🤖
   - 🇬🇧 GB-02 · 91 🤖
-  - 🇩🇪 DE-01 · 93 🤖
-  - 🇩🇪 DE-02 · 93 🤖
-  - 🇩🇪 DE-03 · 93 🤖
-  - 🇩🇪 DE-04 · 92 🤖
-  - 🇩🇪 DE-05 · 90 🤖
-  - 🇩🇪 DE-06 · 89 🤖
-  - 🇪🇸 ES-01 · 92 🤖
+  - 🇬🇧 GB-03 · 91 🤖
+  - 🇬🇧 GB-04 · 89 🤖
+  - 🇨🇭 CH-01 · 92 🤖
+  - 🇨🇭 CH-02 · 82 🤖
+  - 🇨🇭 CH-03 · 81 🤖
+  - 🇨🇭 CH-04 · 81 🤖
+  - 🇨🇭 CH-05 · 80 🤖
+  - 🇨🇭 CH-06 · 80 🤖
+  - 🇰🇷 KR-01 · 92 🤖
+  - 🇰🇷 KR-02 · 71 🤖
+  - 🇸🇬 SG-01 · 92 🤖
+  - 🇸🇬 SG-02 · 78 🤖
+  - 🇭🇰 HK-01 · 91 🤖
+  - 🇩🇪 DE-01 · 91 🤖
+  - 🇩🇪 DE-02 · 91 🤖
+  - 🇩🇪 DE-03 · 90 🤖
+  - 🇩🇪 DE-04 · 85 💬
+  - 🇩🇪 DE-05 · 83 🤖
+  - 🇩🇪 DE-06 · 79 💬
   - 🇺🇦 UA-01 · 91 🤖
-  - 🇺🇦 UA-02 · 61 🤖
-  - 🇯🇵 JP-01 · 91 🤖
-  - 🇸🇬 SG-01 · 91 🤖
-  - 🇪🇬 EG-01 · 90 🤖
-  - 🇪🇬 EG-02 · 84 💬
-  - 🇪🇬 EG-04 · 74 💬
-  - 🇳🇱 NL-01 · 86 🤖
-  - 🇳🇱 NL-02 · 83 🤖
-  - 🇳🇱 NL-03 · 77 🤖
-  - 🇳🇱 NL-04 · 71 💬
-  - 🇳🇱 NL-06 · 67 🤖
-  - 🇫🇮 FI-01 · 85 🤖
-  - 🇦🇷 AR-01 · 85 🤖
-  - 🇦🇷 AR-02 · 77 💬
-  - 🇰🇷 KR-01 · 85 🤖
-  - 🇦🇺 AU-01 · 83 🤖
-  - 🇸🇨 SC-01 · 79 🤖
-  - 🇷🇺 RU-01 · 79 🤖
-  - 🇨🇦 CA-01 · 78 💬
-  - 🇨🇭 CH-01 · 74 🤖
-  - 🇨🇭 CH-02 · 73 🤖
-  - 🇨🇭 CH-03 · 73 🤖
-  - 🇨🇭 CH-04 · 73 🤖
-  - 🇨🇭 CH-05 · 71 🤖
-  - 🇧🇩 BD-01 · 73 💬
-  - 🇧🇩 BD-02 · 60 💬
-  - 🇸🇪 SE-01 · 69 🤖
-  - 🇸🇪 SE-02 · 54 🤖
-  - 🇲🇽 MX-02 · 51 💬
+  - 🇺🇦 UA-02 · 85 🤖
+  - 🇫🇷 FR-01 · 90 🤖
+  - 🇳🇱 NL-01 · 90 🤖
+  - 🇳🇱 NL-02 · 90 🤖
+  - 🇳🇱 NL-03 · 89 🤖
+  - 🇳🇱 NL-04 · 89 🤖
+  - 🇳🇱 NL-05 · 89 🤖
+  - 🇳🇱 NL-06 · 89 🤖
+  - 🇨🇿 CZ-01 · 88 🤖
+  - 🇨🇿 CZ-02 · 88 🤖
+  - 🇸🇪 SE-01 · 87 🤖
+  - 🇸🇪 SE-03 · 76 🤖
+  - 🇨🇲 CM-01 · 86 🤖
+  - 🇮🇳 IN-01 · 86 🤖
+  - 🇮🇳 IN-02 · 82 🤖
+  - 🇪🇬 EG-01 · 83 💬
+  - 🇪🇬 EG-02 · 83 💬
+  - 🇷🇺 RU-01 · 83 🤖
+  - 🇨🇦 CA-01 · 78 🤖
+  - 🇫🇮 FI-01 · 78 🤖
+  - 🇫🇮 FI-02 · 71 🤖
+  - 🇰🇭 KH-01 · 66 💬
+  - 🇵🇭 PH-01 · 57 🤖
+  - 🇮🇩 ID-03 · 38 💬
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
 - name: 🎭 Claude
   type: url-test
   proxies:
-  - 🇺🇸 US-01 · 96 🤖
+  - 🇺🇸 US-01 · 95 🤖
   - 🇺🇸 US-02 · 95 🤖
-  - 🇺🇸 US-03 · 95 🤖
-  - 🇺🇸 US-04 · 95 🤖
-  - 🇺🇸 US-05 · 94 🤖
+  - 🇺🇸 US-03 · 94 🤖
+  - 🇺🇸 US-04 · 93 🤖
+  - 🇺🇸 US-05 · 93 🤖
   - 🇺🇸 US-06 · 93 🤖
-  - 🇬🇧 GB-01 · 93 🤖
+  - 🇯🇵 JP-01 · 93 🤖
+  - 🇯🇵 JP-02 · 93 🤖
+  - 🇯🇵 JP-03 · 89 🤖
+  - 🇨🇴 CO-01 · 92 🤖
+  - 🇨🇴 CO-02 · 38 💬
+  - 🇬🇧 GB-01 · 92 🤖
   - 🇬🇧 GB-02 · 91 🤖
-  - 🇩🇪 DE-01 · 93 🤖
-  - 🇩🇪 DE-02 · 93 🤖
-  - 🇩🇪 DE-03 · 93 🤖
-  - 🇩🇪 DE-04 · 92 🤖
-  - 🇩🇪 DE-05 · 90 🤖
-  - 🇩🇪 DE-06 · 89 🤖
-  - 🇪🇸 ES-01 · 92 🤖
+  - 🇬🇧 GB-03 · 91 🤖
+  - 🇬🇧 GB-04 · 89 🤖
+  - 🇨🇭 CH-01 · 92 🤖
+  - 🇨🇭 CH-02 · 82 🤖
+  - 🇨🇭 CH-03 · 81 🤖
+  - 🇨🇭 CH-04 · 81 🤖
+  - 🇨🇭 CH-05 · 80 🤖
+  - 🇨🇭 CH-06 · 80 🤖
+  - 🇰🇷 KR-01 · 92 🤖
+  - 🇰🇷 KR-02 · 71 🤖
+  - 🇸🇬 SG-01 · 92 🤖
+  - 🇸🇬 SG-02 · 78 🤖
+  - 🇭🇰 HK-01 · 91 🤖
+  - 🇭🇰 HK-02 · 86 💬
+  - 🇭🇰 HK-03 · 85 💬
+  - 🇭🇰 HK-04 · 55 💬
+  - 🇩🇪 DE-01 · 91 🤖
+  - 🇩🇪 DE-02 · 91 🤖
+  - 🇩🇪 DE-03 · 90 🤖
+  - 🇩🇪 DE-05 · 83 🤖
   - 🇺🇦 UA-01 · 91 🤖
-  - 🇺🇦 UA-02 · 61 🤖
-  - 🇯🇵 JP-01 · 91 🤖
-  - 🇸🇬 SG-01 · 91 🤖
-  - 🇪🇬 EG-01 · 90 🤖
-  - 🇳🇱 NL-01 · 86 🤖
-  - 🇳🇱 NL-02 · 83 🤖
-  - 🇳🇱 NL-03 · 77 🤖
-  - 🇳🇱 NL-04 · 71 💬
-  - 🇳🇱 NL-06 · 67 🤖
-  - 🇫🇮 FI-01 · 85 🤖
-  - 🇦🇷 AR-01 · 85 🤖
-  - 🇰🇷 KR-01 · 85 🤖
-  - 🇭🇰 HK-01 · 83 💬
-  - 🇦🇺 AU-01 · 83 🤖
-  - 🇸🇨 SC-01 · 79 🤖
-  - 🇷🇺 RU-01 · 79 🤖
-  - 🇨🇭 CH-01 · 74 🤖
-  - 🇨🇭 CH-02 · 73 🤖
-  - 🇨🇭 CH-03 · 73 🤖
-  - 🇨🇭 CH-04 · 73 🤖
-  - 🇨🇭 CH-05 · 71 🤖
-  - 🇧🇩 BD-01 · 73 💬
-  - 🇧🇩 BD-04 · 29 💬
-  - 🇸🇪 SE-01 · 69 🤖
-  - 🇸🇪 SE-02 · 54 🤖
-  - 🇲🇽 MX-01 · 54 💬
-  - 🇲🇽 MX-02 · 51 💬
+  - 🇺🇦 UA-02 · 85 🤖
+  - 🇫🇷 FR-01 · 90 🤖
+  - 🇳🇱 NL-01 · 90 🤖
+  - 🇳🇱 NL-02 · 90 🤖
+  - 🇳🇱 NL-03 · 89 🤖
+  - 🇳🇱 NL-04 · 89 🤖
+  - 🇳🇱 NL-05 · 89 🤖
+  - 🇳🇱 NL-06 · 89 🤖
+  - 🇨🇿 CZ-01 · 88 🤖
+  - 🇨🇿 CZ-02 · 88 🤖
+  - 🇸🇪 SE-01 · 87 🤖
+  - 🇸🇪 SE-03 · 76 🤖
+  - 🇨🇲 CM-01 · 86 🤖
+  - 🇮🇳 IN-01 · 86 🤖
+  - 🇮🇳 IN-02 · 82 🤖
+  - 🇷🇺 RU-01 · 83 🤖
+  - 🇷🇺 RU-02 · 81 💬
+  - 🇨🇦 CA-01 · 78 🤖
+  - 🇫🇮 FI-01 · 78 🤖
+  - 🇫🇮 FI-02 · 71 🤖
+  - 🇪🇪 EE-01 · 74 💬
+  - 🇰🇭 KH-01 · 66 💬
+  - 🇵🇪 PE-01 · 61 💬
+  - 🇵🇭 PH-01 · 57 🤖
+  - 🇮🇩 ID-04 · 31 💬
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
 - name: ✨ Gemini
   type: url-test
   proxies:
-  - 🇺🇸 US-01 · 96 🤖
+  - 🇺🇸 US-01 · 95 🤖
   - 🇺🇸 US-02 · 95 🤖
-  - 🇺🇸 US-03 · 95 🤖
-  - 🇺🇸 US-04 · 95 🤖
-  - 🇺🇸 US-05 · 94 🤖
+  - 🇺🇸 US-03 · 94 🤖
+  - 🇺🇸 US-04 · 93 🤖
+  - 🇺🇸 US-05 · 93 🤖
   - 🇺🇸 US-06 · 93 🤖
-  - 🇬🇧 GB-01 · 93 🤖
+  - 🇯🇵 JP-01 · 93 🤖
+  - 🇯🇵 JP-02 · 93 🤖
+  - 🇯🇵 JP-03 · 89 🤖
+  - 🇨🇴 CO-01 · 92 🤖
+  - 🇬🇧 GB-01 · 92 🤖
   - 🇬🇧 GB-02 · 91 🤖
-  - 🇩🇪 DE-01 · 93 🤖
-  - 🇩🇪 DE-02 · 93 🤖
-  - 🇩🇪 DE-03 · 93 🤖
-  - 🇩🇪 DE-04 · 92 🤖
-  - 🇩🇪 DE-05 · 90 🤖
-  - 🇩🇪 DE-06 · 89 🤖
-  - 🇪🇸 ES-01 · 92 🤖
+  - 🇬🇧 GB-03 · 91 🤖
+  - 🇬🇧 GB-04 · 89 🤖
+  - 🇨🇭 CH-01 · 92 🤖
+  - 🇨🇭 CH-02 · 82 🤖
+  - 🇨🇭 CH-03 · 81 🤖
+  - 🇨🇭 CH-04 · 81 🤖
+  - 🇨🇭 CH-05 · 80 🤖
+  - 🇨🇭 CH-06 · 80 🤖
+  - 🇰🇷 KR-01 · 92 🤖
+  - 🇰🇷 KR-02 · 71 🤖
+  - 🇸🇬 SG-01 · 92 🤖
+  - 🇸🇬 SG-02 · 78 🤖
+  - 🇭🇰 HK-01 · 91 🤖
+  - 🇭🇰 HK-02 · 86 💬
+  - 🇭🇰 HK-03 · 85 💬
+  - 🇭🇰 HK-04 · 55 💬
+  - 🇩🇪 DE-01 · 91 🤖
+  - 🇩🇪 DE-02 · 91 🤖
+  - 🇩🇪 DE-03 · 90 🤖
+  - 🇩🇪 DE-04 · 85 💬
+  - 🇩🇪 DE-05 · 83 🤖
+  - 🇩🇪 DE-06 · 79 💬
   - 🇺🇦 UA-01 · 91 🤖
-  - 🇺🇦 UA-02 · 61 🤖
-  - 🇯🇵 JP-01 · 91 🤖
-  - 🇸🇬 SG-01 · 91 🤖
-  - 🇪🇬 EG-01 · 90 🤖
-  - 🇪🇬 EG-02 · 84 💬
-  - 🇪🇬 EG-03 · 77 💬
-  - 🇳🇱 NL-01 · 86 🤖
-  - 🇳🇱 NL-02 · 83 🤖
-  - 🇳🇱 NL-03 · 77 🤖
-  - 🇳🇱 NL-06 · 67 🤖
-  - 🇫🇮 FI-01 · 85 🤖
-  - 🇦🇷 AR-01 · 85 🤖
-  - 🇰🇷 KR-01 · 85 🤖
-  - 🇭🇰 HK-01 · 83 💬
-  - 🇦🇺 AU-01 · 83 🤖
-  - 🇸🇨 SC-01 · 79 🤖
-  - 🇷🇺 RU-01 · 79 🤖
-  - 🇷🇺 RU-03 · 67 💬
-  - 🇮🇳 IN-01 · 76 💬
-  - 🇨🇭 CH-01 · 74 🤖
-  - 🇨🇭 CH-02 · 73 🤖
-  - 🇨🇭 CH-03 · 73 🤖
-  - 🇨🇭 CH-04 · 73 🤖
-  - 🇨🇭 CH-05 · 71 🤖
-  - 🇧🇩 BD-02 · 60 💬
-  - 🇧🇩 BD-04 · 29 💬
-  - 🇸🇪 SE-01 · 69 🤖
-  - 🇸🇪 SE-02 · 54 🤖
+  - 🇺🇦 UA-02 · 85 🤖
+  - 🇫🇷 FR-01 · 90 🤖
+  - 🇳🇱 NL-01 · 90 🤖
+  - 🇳🇱 NL-02 · 90 🤖
+  - 🇳🇱 NL-03 · 89 🤖
+  - 🇳🇱 NL-04 · 89 🤖
+  - 🇳🇱 NL-05 · 89 🤖
+  - 🇳🇱 NL-06 · 89 🤖
+  - 🇨🇿 CZ-01 · 88 🤖
+  - 🇨🇿 CZ-02 · 88 🤖
+  - 🇸🇪 SE-01 · 87 🤖
+  - 🇸🇪 SE-02 · 76 💬
+  - 🇸🇪 SE-03 · 76 🤖
+  - 🇨🇲 CM-01 · 86 🤖
+  - 🇮🇳 IN-01 · 86 🤖
+  - 🇮🇳 IN-02 · 82 🤖
+  - 🇪🇬 EG-01 · 83 💬
+  - 🇪🇬 EG-02 · 83 💬
+  - 🇷🇺 RU-01 · 83 🤖
+  - 🇷🇺 RU-02 · 81 💬
+  - 🇷🇺 RU-03 · 74 💬
+  - 🇷🇺 RU-04 · 72 💬
+  - 🇷🇺 RU-05 · 72 💬
+  - 🇨🇦 CA-01 · 78 🤖
+  - 🇻🇪 VE-01 · 78 💬
+  - 🇫🇮 FI-01 · 78 🤖
+  - 🇫🇮 FI-02 · 71 🤖
+  - 🇵🇪 PE-01 · 61 💬
+  - 🇵🇭 PH-01 · 57 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
 - name: 🇺🇸 美国
   type: url-test
   proxies:
-  - 🇺🇸 US-01 · 96 🤖
+  - 🇺🇸 US-01 · 95 🤖
   - 🇺🇸 US-02 · 95 🤖
-  - 🇺🇸 US-03 · 95 🤖
-  - 🇺🇸 US-04 · 95 🤖
-  - 🇺🇸 US-05 · 94 🤖
+  - 🇺🇸 US-03 · 94 🤖
+  - 🇺🇸 US-04 · 93 🤖
+  - 🇺🇸 US-05 · 93 🤖
   - 🇺🇸 US-06 · 93 🤖
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇩🇪 德国
-  type: url-test
-  proxies:
-  - 🇩🇪 DE-01 · 93 🤖
-  - 🇩🇪 DE-02 · 93 🤖
-  - 🇩🇪 DE-03 · 93 🤖
-  - 🇩🇪 DE-04 · 92 🤖
-  - 🇩🇪 DE-05 · 90 🤖
-  - 🇩🇪 DE-06 · 89 🤖
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇳🇱 荷兰
-  type: url-test
-  proxies:
-  - 🇳🇱 NL-01 · 86 🤖
-  - 🇳🇱 NL-02 · 83 🤖
-  - 🇳🇱 NL-03 · 77 🤖
-  - 🇳🇱 NL-04 · 71 💬
-  - 🇳🇱 NL-05 · 70
-  - 🇳🇱 NL-06 · 67 🤖
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇬🇧 英国
-  type: url-test
-  proxies:
-  - 🇬🇧 GB-01 · 93 🤖
-  - 🇬🇧 GB-02 · 91 🤖
-  - 🇬🇧 GB-03 · 73
-  - 🇬🇧 GB-04 · 72
-  - 🇬🇧 GB-05 · 72
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
 - name: 🇨🇭 瑞士
   type: url-test
   proxies:
-  - 🇨🇭 CH-01 · 74 🤖
-  - 🇨🇭 CH-02 · 73 🤖
-  - 🇨🇭 CH-03 · 73 🤖
-  - 🇨🇭 CH-04 · 73 🤖
-  - 🇨🇭 CH-05 · 71 🤖
+  - 🇨🇭 CH-01 · 92 🤖
+  - 🇨🇭 CH-02 · 82 🤖
+  - 🇨🇭 CH-03 · 81 🤖
+  - 🇨🇭 CH-04 · 81 🤖
+  - 🇨🇭 CH-05 · 80 🤖
+  - 🇨🇭 CH-06 · 80 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇪🇬 埃及
+- name: 🇩🇪 德国
   type: url-test
   proxies:
-  - 🇪🇬 EG-01 · 90 🤖
-  - 🇪🇬 EG-02 · 84 💬
-  - 🇪🇬 EG-03 · 77 💬
-  - 🇪🇬 EG-04 · 74 💬
+  - 🇩🇪 DE-01 · 91 🤖
+  - 🇩🇪 DE-02 · 91 🤖
+  - 🇩🇪 DE-03 · 90 🤖
+  - 🇩🇪 DE-04 · 85 💬
+  - 🇩🇪 DE-05 · 83 🤖
+  - 🇩🇪 DE-06 · 79 💬
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇧🇩 孟加拉国
+- name: 🇳🇱 荷兰
   type: url-test
   proxies:
-  - 🇧🇩 BD-01 · 73 💬
-  - 🇧🇩 BD-02 · 60 💬
-  - 🇧🇩 BD-03 · 46
-  - 🇧🇩 BD-04 · 29 💬
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇦🇷 阿根廷
-  type: url-test
-  proxies:
-  - 🇦🇷 AR-01 · 85 🤖
-  - 🇦🇷 AR-02 · 77 💬
-  - 🇦🇷 AR-03 · 38
+  - 🇳🇱 NL-01 · 90 🤖
+  - 🇳🇱 NL-02 · 90 🤖
+  - 🇳🇱 NL-03 · 89 🤖
+  - 🇳🇱 NL-04 · 89 🤖
+  - 🇳🇱 NL-05 · 89 🤖
+  - 🇳🇱 NL-06 · 89 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
 - name: 🇷🇺 俄罗斯
   type: url-test
   proxies:
-  - 🇷🇺 RU-01 · 79 🤖
-  - 🇷🇺 RU-02 · 69
-  - 🇷🇺 RU-03 · 67 💬
+  - 🇷🇺 RU-01 · 83 🤖
+  - 🇷🇺 RU-02 · 81 💬
+  - 🇷🇺 RU-03 · 74 💬
+  - 🇷🇺 RU-04 · 72 💬
+  - 🇷🇺 RU-05 · 72 💬
+  - 🇷🇺 RU-06 · 67
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇨🇦 加拿大
+- name: 🇬🇧 英国
   type: url-test
   proxies:
-  - 🇨🇦 CA-01 · 78 💬
-  - 🇨🇦 CA-02 · 73
+  - 🇬🇧 GB-01 · 92 🤖
+  - 🇬🇧 GB-02 · 91 🤖
+  - 🇬🇧 GB-03 · 91 🤖
+  - 🇬🇧 GB-04 · 89 🤖
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇭🇰 中国香港
+  type: url-test
+  proxies:
+  - 🇭🇰 HK-01 · 91 🤖
+  - 🇭🇰 HK-02 · 86 💬
+  - 🇭🇰 HK-03 · 85 💬
+  - 🇭🇰 HK-04 · 55 💬
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇯🇵 日本
+  type: url-test
+  proxies:
+  - 🇯🇵 JP-01 · 93 🤖
+  - 🇯🇵 JP-02 · 93 🤖
+  - 🇯🇵 JP-03 · 89 🤖
+  - 🇯🇵 JP-04 · 71
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇮🇩 印度尼西亚
+  type: url-test
+  proxies:
+  - 🇮🇩 ID-01 · 54
+  - 🇮🇩 ID-02 · 47
+  - 🇮🇩 ID-03 · 38 💬
+  - 🇮🇩 ID-04 · 31 💬
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇸🇪 瑞典
+  type: url-test
+  proxies:
+  - 🇸🇪 SE-01 · 87 🤖
+  - 🇸🇪 SE-02 · 76 💬
+  - 🇸🇪 SE-03 · 76 🤖
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇸🇬 新加坡
+  type: url-test
+  proxies:
+  - 🇸🇬 SG-01 · 92 🤖
+  - 🇸🇬 SG-02 · 78 🤖
+  - 🇸🇬 SG-03 · 71
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇨🇴 哥伦比亚
+  type: url-test
+  proxies:
+  - 🇨🇴 CO-01 · 92 🤖
+  - 🇨🇴 CO-02 · 38 💬
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇨🇿 捷克
+  type: url-test
+  proxies:
+  - 🇨🇿 CZ-01 · 88 🤖
+  - 🇨🇿 CZ-02 · 88 🤖
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇫🇮 芬兰
+  type: url-test
+  proxies:
+  - 🇫🇮 FI-01 · 78 🤖
+  - 🇫🇮 FI-02 · 71 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
@@ -657,109 +804,94 @@ proxy-groups:
   type: url-test
   proxies:
   - 🇺🇦 UA-01 · 91 🤖
-  - 🇺🇦 UA-02 · 61 🤖
+  - 🇺🇦 UA-02 · 85 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇯🇵 日本
+- name: 🇪🇬 埃及
   type: url-test
   proxies:
-  - 🇯🇵 JP-01 · 91 🤖
-  - 🇯🇵 JP-02 · 69
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇮🇳 印度
-  type: url-test
-  proxies:
-  - 🇮🇳 IN-01 · 76 💬
-  - 🇮🇳 IN-02 · 64
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇸🇪 瑞典
-  type: url-test
-  proxies:
-  - 🇸🇪 SE-01 · 69 🤖
-  - 🇸🇪 SE-02 · 54 🤖
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇲🇽 墨西哥
-  type: url-test
-  proxies:
-  - 🇲🇽 MX-01 · 54 💬
-  - 🇲🇽 MX-02 · 51 💬
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇳🇮 NI
-  type: url-test
-  proxies:
-  - 🇳🇮 NI-01 · 54
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇪🇸 西班牙
-  type: url-test
-  proxies:
-  - 🇪🇸 ES-01 · 92 🤖
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇸🇨 塞舌尔
-  type: url-test
-  proxies:
-  - 🇸🇨 SC-01 · 79 🤖
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇫🇮 芬兰
-  type: url-test
-  proxies:
-  - 🇫🇮 FI-01 · 85 🤖
-  url: http://www.gstatic.com/generate_204
-  interval: 180
-  tolerance: 50
-- name: 🇹🇷 土耳其
-  type: url-test
-  proxies:
-  - 🇹🇷 TR-01 · 43
+  - 🇪🇬 EG-01 · 83 💬
+  - 🇪🇬 EG-02 · 83 💬
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
 - name: 🇰🇷 韩国
   type: url-test
   proxies:
-  - 🇰🇷 KR-01 · 85 🤖
+  - 🇰🇷 KR-01 · 92 🤖
+  - 🇰🇷 KR-02 · 71 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇮🇷 伊朗
+- name: 🇮🇳 印度
   type: url-test
   proxies:
-  - 🇮🇷 IR-01 · 64
+  - 🇮🇳 IN-01 · 86 🤖
+  - 🇮🇳 IN-02 · 82 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇭🇰 中国香港
+- name: 🇨🇦 加拿大
   type: url-test
   proxies:
-  - 🇭🇰 HK-01 · 83 💬
+  - 🇨🇦 CA-01 · 78 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇸🇬 新加坡
+- name: 🇲🇽 墨西哥
   type: url-test
   proxies:
-  - 🇸🇬 SG-01 · 91 🤖
+  - 🇲🇽 MX-01 · 73
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
-- name: 🇦🇺 澳大利亚
+- name: 🇻🇪 委内瑞拉
   type: url-test
   proxies:
-  - 🇦🇺 AU-01 · 83 🤖
+  - 🇻🇪 VE-01 · 78 💬
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇫🇷 法国
+  type: url-test
+  proxies:
+  - 🇫🇷 FR-01 · 90 🤖
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇪🇪 爱沙尼亚
+  type: url-test
+  proxies:
+  - 🇪🇪 EE-01 · 74 💬
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇵🇪 秘鲁
+  type: url-test
+  proxies:
+  - 🇵🇪 PE-01 · 61 💬
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇨🇲 喀麦隆
+  type: url-test
+  proxies:
+  - 🇨🇲 CM-01 · 86 🤖
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇰🇭 柬埔寨
+  type: url-test
+  proxies:
+  - 🇰🇭 KH-01 · 66 💬
+  url: http://www.gstatic.com/generate_204
+  interval: 180
+  tolerance: 50
+- name: 🇵🇭 菲律宾
+  type: url-test
+  proxies:
+  - 🇵🇭 PH-01 · 57 🤖
   url: http://www.gstatic.com/generate_204
   interval: 180
   tolerance: 50
